@@ -47,7 +47,7 @@ async function getAllConversationsByUserId(req, res, next) {
             Media: true,
           },
         },
-        ChatMember: {
+        Participant: {
           // where: {
           //   NOT: {
           //     userId: userId,

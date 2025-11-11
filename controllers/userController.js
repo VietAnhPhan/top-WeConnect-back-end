@@ -26,7 +26,7 @@ async function searchUser(req, res, next) {
             username: { startsWith: req.query.contact, mode: "insensitive" },
           },
           {
-            name: {
+            fullname: {
               contains: req.query.contact.toLowerCase(),
               mode: "insensitive",
             },
