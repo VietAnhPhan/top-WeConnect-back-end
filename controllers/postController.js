@@ -38,6 +38,39 @@ async function getPosts(req, res) {
   return res.json(posts);
 }
 
+async function getTrendingPosts(req, res, next) {
+  if (req.query.trending && req.query.trending == "true") {
+    const posts = await prisma.post.findMany({
+      where: {
+        isActive: true,
+      },
+      include: {
+        author: {
+          select: {
+            username: true,
+            fullname: true,
+            avatarPath: true,
+          },
+        },
+        _count: {
+          select: {
+            Like: true,
+            Comment: true,
+          },
+        },
+      },
+      orderBy: {
+        Like: {
+          _count: "desc",
+        },
+      },
+    });
+
+    return res.json(posts);
+  }
+  next();
+}
+
 async function createPost(req, res, next) {
   try {
     const post = {
@@ -111,6 +144,7 @@ async function searchPosts(req, res, next) {
           select: {
             fullname: true,
             username: true,
+            avatarPath: true,
           },
         },
         _count: {
@@ -133,4 +167,5 @@ module.exports = {
   updatePost,
   deletePost,
   searchPosts,
+  getTrendingPosts,
 };

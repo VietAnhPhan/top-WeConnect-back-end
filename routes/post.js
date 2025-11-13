@@ -28,6 +28,8 @@ router.get("/:id", postController.getPost);
 
 router.get("{search}", postController.searchPosts);
 
+router.get("{trending}", postController.getTrendingPosts);
+
 router.post("/", postController.createPost);
 
 router.patch("/:id", postController.updatePost);

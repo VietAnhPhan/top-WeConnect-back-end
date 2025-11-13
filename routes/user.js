@@ -33,6 +33,8 @@ router.delete("/:id", userController.deleteUser);
 
 router.get("{search}", userController.searchUsers);
 
+router.get("{top_users}", userController.getUsersByHighestFollowers);
+
 router.get("{conversation_id&auth_id}", userController.getChatUser);
 
 router.get("/", userController.getUsers);

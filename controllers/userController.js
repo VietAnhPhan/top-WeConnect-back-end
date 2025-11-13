@@ -13,11 +13,7 @@ async function getUser(req, res) {
 }
 
 async function searchUsers(req, res, next) {
-  if (
-   
-    req.query.search &&
-    req.query.search != ""
-  ) {
+  if (req.query.search && req.query.search !== "") {
     const User = await prisma.user.findMany({
       where: {
         OR: [
@@ -89,6 +85,24 @@ async function getUsers(req, res) {
   });
 
   return res.json(users);
+}
+
+async function getUsersByHighestFollowers(req, res, next) {
+  if (req.query.top_users && req.query.top_users == "true") {
+    const users = await prisma.user.findMany({
+      where: {
+        isActive: true,
+      },
+      orderBy: {
+        follower: {
+          _count: "desc",
+        },
+      },
+    });
+
+    return res.json(users);
+  }
+  next();
 }
 
 async function createUser(req, res, next) {
@@ -200,4 +214,5 @@ module.exports = {
   deleteUser,
   resetPassword,
   getChatUser,
+  getUsersByHighestFollowers,
 };
