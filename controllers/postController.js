@@ -67,9 +67,9 @@ async function getPostsByUsername(req, res) {
         },
       },
     },
-    // orderBy: {
-    //   created_at: "desc",
-    // },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return res.json(posts);
