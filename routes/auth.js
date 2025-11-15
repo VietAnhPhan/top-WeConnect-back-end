@@ -121,4 +121,6 @@ router.put(
   userController.resetPassword
 );
 
+router.post("/guests", userController.createGuest);
+
 module.exports = router;

@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const { prisma } = require("../config/helpers");
 const jwt = require("jsonwebtoken");
+const { generateUsername } = require("unique-username-generator");
 
 async function getUser(req, res) {
   const user = await prisma.user.findFirst({
@@ -131,11 +132,10 @@ async function createUser(req, res, next) {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     const user = {
-      name: req.body.name,
+      fullname: req.body.name,
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
-      isAdmin: req.body.isAdmin ? true : false,
     };
 
     const User = await prisma.user.create({
@@ -147,8 +147,33 @@ async function createUser(req, res, next) {
       password: req.body.password,
     };
 
-    const token = jwt.sign(userAuth, "jwt_secret");
+    const token = jwt.sign(userAuth, process.env.SECRET_KEY);
     return res.json({ username: User.username, token });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function createGuest(req, res, next) {
+  try {
+    const username = generateUsername("", 3);
+    const password = username;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const fullname = username;
+
+    const user = {
+      username,
+      fullname,
+      password: hashedPassword,
+    };
+
+    await prisma.user.create({
+      data: user,
+    });
+
+    const token = jwt.sign({ username, password }, process.env.SECRET_KEY);
+
+    return res.json({ username, token });
   } catch (err) {
     next(err);
   }
@@ -237,4 +262,5 @@ module.exports = {
   getChatUser,
   getUsersByHighestFollowers,
   getUserByUsername,
+  createGuest,
 };
