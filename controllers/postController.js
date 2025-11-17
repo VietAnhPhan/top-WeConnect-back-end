@@ -23,6 +23,11 @@ async function getPosts(req, res) {
           avatarPath: true,
         },
       },
+      Comment: {
+        include: {
+          User: true,
+        },
+      },
       _count: {
         select: {
           Like: true,
