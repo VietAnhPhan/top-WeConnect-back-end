@@ -65,6 +65,11 @@ async function getPostsByUsername(req, res) {
           avatarPath: true,
         },
       },
+      Comment: {
+        include: {
+          User: true,
+        },
+      },
       _count: {
         select: {
           Like: true,
@@ -92,6 +97,11 @@ async function getTrendingPosts(req, res, next) {
             username: true,
             fullname: true,
             avatarPath: true,
+          },
+        },
+        Comment: {
+          include: {
+            User: true,
           },
         },
         _count: {
