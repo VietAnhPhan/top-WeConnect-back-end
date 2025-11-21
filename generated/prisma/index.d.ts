@@ -78,6 +78,16 @@ export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
  * 
  */
 export type Like = $Result.DefaultSelection<Prisma.$LikePayload>
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = $Result.DefaultSelection<Prisma.$NotificationPayload>
+/**
+ * Model OAuth
+ * 
+ */
+export type OAuth = $Result.DefaultSelection<Prisma.$OAuthPayload>
 
 /**
  * Enums
@@ -119,6 +129,15 @@ export const FollowStatus: {
 
 export type FollowStatus = (typeof FollowStatus)[keyof typeof FollowStatus]
 
+
+export const notificationType: {
+  follow: 'follow',
+  comment: 'comment',
+  like: 'like'
+};
+
+export type notificationType = (typeof notificationType)[keyof typeof notificationType]
+
 }
 
 export type MediaType = $Enums.MediaType
@@ -136,6 +155,10 @@ export const FriendRequestStatus: typeof $Enums.FriendRequestStatus
 export type FollowStatus = $Enums.FollowStatus
 
 export const FollowStatus: typeof $Enums.FollowStatus
+
+export type notificationType = $Enums.notificationType
+
+export const notificationType: typeof $Enums.notificationType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -384,6 +407,26 @@ export class PrismaClient<
     * ```
     */
   get like(): Prisma.LikeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.notification`: Exposes CRUD operations for the **Notification** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Notifications
+    * const notifications = await prisma.notification.findMany()
+    * ```
+    */
+  get notification(): Prisma.NotificationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.oAuth`: Exposes CRUD operations for the **OAuth** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OAuths
+    * const oAuths = await prisma.oAuth.findMany()
+    * ```
+    */
+  get oAuth(): Prisma.OAuthDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -836,7 +879,9 @@ export namespace Prisma {
     Post: 'Post',
     PostMedia: 'PostMedia',
     Comment: 'Comment',
-    Like: 'Like'
+    Like: 'Like',
+    Notification: 'Notification',
+    OAuth: 'OAuth'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -855,7 +900,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "conversation" | "message" | "participant" | "messageMedia" | "friendRequest" | "friend" | "followRequest" | "post" | "postMedia" | "comment" | "like"
+      modelProps: "user" | "session" | "conversation" | "message" | "participant" | "messageMedia" | "friendRequest" | "friend" | "followRequest" | "post" | "postMedia" | "comment" | "like" | "notification" | "oAuth"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1821,6 +1866,154 @@ export namespace Prisma {
           }
         }
       }
+      Notification: {
+        payload: Prisma.$NotificationPayload<ExtArgs>
+        fields: Prisma.NotificationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NotificationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          findFirst: {
+            args: Prisma.NotificationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          findMany: {
+            args: Prisma.NotificationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          create: {
+            args: Prisma.NotificationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          createMany: {
+            args: Prisma.NotificationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          delete: {
+            args: Prisma.NotificationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          update: {
+            args: Prisma.NotificationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          deleteMany: {
+            args: Prisma.NotificationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NotificationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+          }
+          upsert: {
+            args: Prisma.NotificationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NotificationPayload>
+          }
+          aggregate: {
+            args: Prisma.NotificationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNotification>
+          }
+          groupBy: {
+            args: Prisma.NotificationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NotificationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NotificationCountArgs<ExtArgs>
+            result: $Utils.Optional<NotificationCountAggregateOutputType> | number
+          }
+        }
+      }
+      OAuth: {
+        payload: Prisma.$OAuthPayload<ExtArgs>
+        fields: Prisma.OAuthFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OAuthFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OAuthFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthPayload>
+          }
+          findFirst: {
+            args: Prisma.OAuthFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OAuthFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthPayload>
+          }
+          findMany: {
+            args: Prisma.OAuthFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthPayload>[]
+          }
+          create: {
+            args: Prisma.OAuthCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthPayload>
+          }
+          createMany: {
+            args: Prisma.OAuthCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OAuthCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthPayload>[]
+          }
+          delete: {
+            args: Prisma.OAuthDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthPayload>
+          }
+          update: {
+            args: Prisma.OAuthUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthPayload>
+          }
+          deleteMany: {
+            args: Prisma.OAuthDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OAuthUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OAuthUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthPayload>[]
+          }
+          upsert: {
+            args: Prisma.OAuthUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OAuthPayload>
+          }
+          aggregate: {
+            args: Prisma.OAuthAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOAuth>
+          }
+          groupBy: {
+            args: Prisma.OAuthGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OAuthGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OAuthCountArgs<ExtArgs>
+            result: $Utils.Optional<OAuthCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1930,6 +2123,8 @@ export namespace Prisma {
     postMedia?: PostMediaOmit
     comment?: CommentOmit
     like?: LikeOmit
+    notification?: NotificationOmit
+    oAuth?: OAuthOmit
   }
 
   /* Types for Logging */
@@ -2022,6 +2217,9 @@ export namespace Prisma {
     Post: number
     Comment: number
     Like: number
+    CurrentUser: number
+    OtherUser: number
+    OAuths: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2037,6 +2235,9 @@ export namespace Prisma {
     Post?: boolean | UserCountOutputTypeCountPostArgs
     Comment?: boolean | UserCountOutputTypeCountCommentArgs
     Like?: boolean | UserCountOutputTypeCountLikeArgs
+    CurrentUser?: boolean | UserCountOutputTypeCountCurrentUserArgs
+    OtherUser?: boolean | UserCountOutputTypeCountOtherUserArgs
+    OAuths?: boolean | UserCountOutputTypeCountOAuthsArgs
   }
 
   // Custom InputTypes
@@ -2132,6 +2333,27 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountLikeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LikeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCurrentUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOtherUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOAuthsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OAuthWhereInput
   }
 
 
@@ -2476,7 +2698,7 @@ export namespace Prisma {
     id: number
     fullname: string
     username: string
-    email: string
+    email: string | null
     password: string
     about: string | null
     bio: string | null
@@ -2533,6 +2755,9 @@ export namespace Prisma {
     Post?: boolean | User$PostArgs<ExtArgs>
     Comment?: boolean | User$CommentArgs<ExtArgs>
     Like?: boolean | User$LikeArgs<ExtArgs>
+    CurrentUser?: boolean | User$CurrentUserArgs<ExtArgs>
+    OtherUser?: boolean | User$OtherUserArgs<ExtArgs>
+    OAuths?: boolean | User$OAuthsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2598,6 +2823,9 @@ export namespace Prisma {
     Post?: boolean | User$PostArgs<ExtArgs>
     Comment?: boolean | User$CommentArgs<ExtArgs>
     Like?: boolean | User$LikeArgs<ExtArgs>
+    CurrentUser?: boolean | User$CurrentUserArgs<ExtArgs>
+    OtherUser?: boolean | User$OtherUserArgs<ExtArgs>
+    OAuths?: boolean | User$OAuthsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2618,12 +2846,15 @@ export namespace Prisma {
       Post: Prisma.$PostPayload<ExtArgs>[]
       Comment: Prisma.$CommentPayload<ExtArgs>[]
       Like: Prisma.$LikePayload<ExtArgs>[]
+      CurrentUser: Prisma.$NotificationPayload<ExtArgs>[]
+      OtherUser: Prisma.$NotificationPayload<ExtArgs>[]
+      OAuths: Prisma.$OAuthPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       fullname: string
       username: string
-      email: string
+      email: string | null
       password: string
       about: string | null
       bio: string | null
@@ -3039,6 +3270,9 @@ export namespace Prisma {
     Post<T extends User$PostArgs<ExtArgs> = {}>(args?: Subset<T, User$PostArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Comment<T extends User$CommentArgs<ExtArgs> = {}>(args?: Subset<T, User$CommentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Like<T extends User$LikeArgs<ExtArgs> = {}>(args?: Subset<T, User$LikeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    CurrentUser<T extends User$CurrentUserArgs<ExtArgs> = {}>(args?: Subset<T, User$CurrentUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    OtherUser<T extends User$OtherUserArgs<ExtArgs> = {}>(args?: Subset<T, User$OtherUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    OAuths<T extends User$OAuthsArgs<ExtArgs> = {}>(args?: Subset<T, User$OAuthsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3754,6 +3988,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LikeScalarFieldEnum | LikeScalarFieldEnum[]
+  }
+
+  /**
+   * User.CurrentUser
+   */
+  export type User$CurrentUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    cursor?: NotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * User.OtherUser
+   */
+  export type User$OtherUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    cursor?: NotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * User.OAuths
+   */
+  export type User$OAuthsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthInclude<ExtArgs> | null
+    where?: OAuthWhereInput
+    orderBy?: OAuthOrderByWithRelationInput | OAuthOrderByWithRelationInput[]
+    cursor?: OAuthWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OAuthScalarFieldEnum | OAuthScalarFieldEnum[]
   }
 
   /**
@@ -17273,6 +17579,2223 @@ export namespace Prisma {
 
 
   /**
+   * Model Notification
+   */
+
+  export type AggregateNotification = {
+    _count: NotificationCountAggregateOutputType | null
+    _avg: NotificationAvgAggregateOutputType | null
+    _sum: NotificationSumAggregateOutputType | null
+    _min: NotificationMinAggregateOutputType | null
+    _max: NotificationMaxAggregateOutputType | null
+  }
+
+  export type NotificationAvgAggregateOutputType = {
+    id: number | null
+    currentUserId: number | null
+    otherUserId: number | null
+  }
+
+  export type NotificationSumAggregateOutputType = {
+    id: number | null
+    currentUserId: number | null
+    otherUserId: number | null
+  }
+
+  export type NotificationMinAggregateOutputType = {
+    id: number | null
+    currentUserId: number | null
+    otherUserId: number | null
+    type: $Enums.notificationType | null
+    isActive: boolean | null
+    createdAt: Date | null
+  }
+
+  export type NotificationMaxAggregateOutputType = {
+    id: number | null
+    currentUserId: number | null
+    otherUserId: number | null
+    type: $Enums.notificationType | null
+    isActive: boolean | null
+    createdAt: Date | null
+  }
+
+  export type NotificationCountAggregateOutputType = {
+    id: number
+    currentUserId: number
+    otherUserId: number
+    type: number
+    isActive: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type NotificationAvgAggregateInputType = {
+    id?: true
+    currentUserId?: true
+    otherUserId?: true
+  }
+
+  export type NotificationSumAggregateInputType = {
+    id?: true
+    currentUserId?: true
+    otherUserId?: true
+  }
+
+  export type NotificationMinAggregateInputType = {
+    id?: true
+    currentUserId?: true
+    otherUserId?: true
+    type?: true
+    isActive?: true
+    createdAt?: true
+  }
+
+  export type NotificationMaxAggregateInputType = {
+    id?: true
+    currentUserId?: true
+    otherUserId?: true
+    type?: true
+    isActive?: true
+    createdAt?: true
+  }
+
+  export type NotificationCountAggregateInputType = {
+    id?: true
+    currentUserId?: true
+    otherUserId?: true
+    type?: true
+    isActive?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type NotificationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Notification to aggregate.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Notifications
+    **/
+    _count?: true | NotificationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NotificationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NotificationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NotificationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NotificationMaxAggregateInputType
+  }
+
+  export type GetNotificationAggregateType<T extends NotificationAggregateArgs> = {
+        [P in keyof T & keyof AggregateNotification]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNotification[P]>
+      : GetScalarType<T[P], AggregateNotification[P]>
+  }
+
+
+
+
+  export type NotificationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithAggregationInput | NotificationOrderByWithAggregationInput[]
+    by: NotificationScalarFieldEnum[] | NotificationScalarFieldEnum
+    having?: NotificationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NotificationCountAggregateInputType | true
+    _avg?: NotificationAvgAggregateInputType
+    _sum?: NotificationSumAggregateInputType
+    _min?: NotificationMinAggregateInputType
+    _max?: NotificationMaxAggregateInputType
+  }
+
+  export type NotificationGroupByOutputType = {
+    id: number
+    currentUserId: number
+    otherUserId: number
+    type: $Enums.notificationType
+    isActive: boolean
+    createdAt: Date
+    _count: NotificationCountAggregateOutputType | null
+    _avg: NotificationAvgAggregateOutputType | null
+    _sum: NotificationSumAggregateOutputType | null
+    _min: NotificationMinAggregateOutputType | null
+    _max: NotificationMaxAggregateOutputType | null
+  }
+
+  type GetNotificationGroupByPayload<T extends NotificationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NotificationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NotificationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NotificationGroupByOutputType[P]>
+            : GetScalarType<T[P], NotificationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NotificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    currentUserId?: boolean
+    otherUserId?: boolean
+    type?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    CurrentUser?: boolean | UserDefaultArgs<ExtArgs>
+    OtherUser?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    currentUserId?: boolean
+    otherUserId?: boolean
+    type?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    CurrentUser?: boolean | UserDefaultArgs<ExtArgs>
+    OtherUser?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    currentUserId?: boolean
+    otherUserId?: boolean
+    type?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    CurrentUser?: boolean | UserDefaultArgs<ExtArgs>
+    OtherUser?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["notification"]>
+
+  export type NotificationSelectScalar = {
+    id?: boolean
+    currentUserId?: boolean
+    otherUserId?: boolean
+    type?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+  }
+
+  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "currentUserId" | "otherUserId" | "type" | "isActive" | "createdAt", ExtArgs["result"]["notification"]>
+  export type NotificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CurrentUser?: boolean | UserDefaultArgs<ExtArgs>
+    OtherUser?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NotificationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CurrentUser?: boolean | UserDefaultArgs<ExtArgs>
+    OtherUser?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type NotificationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CurrentUser?: boolean | UserDefaultArgs<ExtArgs>
+    OtherUser?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $NotificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Notification"
+    objects: {
+      CurrentUser: Prisma.$UserPayload<ExtArgs>
+      OtherUser: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      currentUserId: number
+      otherUserId: number
+      type: $Enums.notificationType
+      isActive: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["notification"]>
+    composites: {}
+  }
+
+  type NotificationGetPayload<S extends boolean | null | undefined | NotificationDefaultArgs> = $Result.GetResult<Prisma.$NotificationPayload, S>
+
+  type NotificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NotificationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NotificationCountAggregateInputType | true
+    }
+
+  export interface NotificationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Notification'], meta: { name: 'Notification' } }
+    /**
+     * Find zero or one Notification that matches the filter.
+     * @param {NotificationFindUniqueArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NotificationFindUniqueArgs>(args: SelectSubset<T, NotificationFindUniqueArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Notification that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NotificationFindUniqueOrThrowArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NotificationFindUniqueOrThrowArgs>(args: SelectSubset<T, NotificationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Notification that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindFirstArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NotificationFindFirstArgs>(args?: SelectSubset<T, NotificationFindFirstArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Notification that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindFirstOrThrowArgs} args - Arguments to find a Notification
+     * @example
+     * // Get one Notification
+     * const notification = await prisma.notification.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NotificationFindFirstOrThrowArgs>(args?: SelectSubset<T, NotificationFindFirstOrThrowArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Notifications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Notifications
+     * const notifications = await prisma.notification.findMany()
+     * 
+     * // Get first 10 Notifications
+     * const notifications = await prisma.notification.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const notificationWithIdOnly = await prisma.notification.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NotificationFindManyArgs>(args?: SelectSubset<T, NotificationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Notification.
+     * @param {NotificationCreateArgs} args - Arguments to create a Notification.
+     * @example
+     * // Create one Notification
+     * const Notification = await prisma.notification.create({
+     *   data: {
+     *     // ... data to create a Notification
+     *   }
+     * })
+     * 
+     */
+    create<T extends NotificationCreateArgs>(args: SelectSubset<T, NotificationCreateArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Notifications.
+     * @param {NotificationCreateManyArgs} args - Arguments to create many Notifications.
+     * @example
+     * // Create many Notifications
+     * const notification = await prisma.notification.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NotificationCreateManyArgs>(args?: SelectSubset<T, NotificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Notifications and returns the data saved in the database.
+     * @param {NotificationCreateManyAndReturnArgs} args - Arguments to create many Notifications.
+     * @example
+     * // Create many Notifications
+     * const notification = await prisma.notification.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Notifications and only return the `id`
+     * const notificationWithIdOnly = await prisma.notification.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NotificationCreateManyAndReturnArgs>(args?: SelectSubset<T, NotificationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Notification.
+     * @param {NotificationDeleteArgs} args - Arguments to delete one Notification.
+     * @example
+     * // Delete one Notification
+     * const Notification = await prisma.notification.delete({
+     *   where: {
+     *     // ... filter to delete one Notification
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NotificationDeleteArgs>(args: SelectSubset<T, NotificationDeleteArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Notification.
+     * @param {NotificationUpdateArgs} args - Arguments to update one Notification.
+     * @example
+     * // Update one Notification
+     * const notification = await prisma.notification.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NotificationUpdateArgs>(args: SelectSubset<T, NotificationUpdateArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Notifications.
+     * @param {NotificationDeleteManyArgs} args - Arguments to filter Notifications to delete.
+     * @example
+     * // Delete a few Notifications
+     * const { count } = await prisma.notification.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NotificationDeleteManyArgs>(args?: SelectSubset<T, NotificationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Notifications
+     * const notification = await prisma.notification.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NotificationUpdateManyArgs>(args: SelectSubset<T, NotificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Notifications and returns the data updated in the database.
+     * @param {NotificationUpdateManyAndReturnArgs} args - Arguments to update many Notifications.
+     * @example
+     * // Update many Notifications
+     * const notification = await prisma.notification.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Notifications and only return the `id`
+     * const notificationWithIdOnly = await prisma.notification.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NotificationUpdateManyAndReturnArgs>(args: SelectSubset<T, NotificationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Notification.
+     * @param {NotificationUpsertArgs} args - Arguments to update or create a Notification.
+     * @example
+     * // Update or create a Notification
+     * const notification = await prisma.notification.upsert({
+     *   create: {
+     *     // ... data to create a Notification
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Notification we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NotificationUpsertArgs>(args: SelectSubset<T, NotificationUpsertArgs<ExtArgs>>): Prisma__NotificationClient<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Notifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationCountArgs} args - Arguments to filter Notifications to count.
+     * @example
+     * // Count the number of Notifications
+     * const count = await prisma.notification.count({
+     *   where: {
+     *     // ... the filter for the Notifications we want to count
+     *   }
+     * })
+    **/
+    count<T extends NotificationCountArgs>(
+      args?: Subset<T, NotificationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NotificationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Notification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NotificationAggregateArgs>(args: Subset<T, NotificationAggregateArgs>): Prisma.PrismaPromise<GetNotificationAggregateType<T>>
+
+    /**
+     * Group by Notification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NotificationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NotificationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NotificationGroupByArgs['orderBy'] }
+        : { orderBy?: NotificationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NotificationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNotificationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Notification model
+   */
+  readonly fields: NotificationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Notification.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NotificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    CurrentUser<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    OtherUser<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Notification model
+   */
+  interface NotificationFieldRefs {
+    readonly id: FieldRef<"Notification", 'Int'>
+    readonly currentUserId: FieldRef<"Notification", 'Int'>
+    readonly otherUserId: FieldRef<"Notification", 'Int'>
+    readonly type: FieldRef<"Notification", 'notificationType'>
+    readonly isActive: FieldRef<"Notification", 'Boolean'>
+    readonly createdAt: FieldRef<"Notification", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Notification findUnique
+   */
+  export type NotificationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification findUniqueOrThrow
+   */
+  export type NotificationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification findFirst
+   */
+  export type NotificationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notifications.
+     */
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification findFirstOrThrow
+   */
+  export type NotificationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notification to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Notifications.
+     */
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification findMany
+   */
+  export type NotificationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Notifications to fetch.
+     */
+    where?: NotificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Notifications to fetch.
+     */
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Notifications.
+     */
+    cursor?: NotificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Notifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Notifications.
+     */
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
+   * Notification create
+   */
+  export type NotificationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Notification.
+     */
+    data: XOR<NotificationCreateInput, NotificationUncheckedCreateInput>
+  }
+
+  /**
+   * Notification createMany
+   */
+  export type NotificationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Notifications.
+     */
+    data: NotificationCreateManyInput | NotificationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Notification createManyAndReturn
+   */
+  export type NotificationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Notifications.
+     */
+    data: NotificationCreateManyInput | NotificationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Notification update
+   */
+  export type NotificationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Notification.
+     */
+    data: XOR<NotificationUpdateInput, NotificationUncheckedUpdateInput>
+    /**
+     * Choose, which Notification to update.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification updateMany
+   */
+  export type NotificationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Notifications.
+     */
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput>
+    /**
+     * Filter which Notifications to update
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Notification updateManyAndReturn
+   */
+  export type NotificationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * The data used to update Notifications.
+     */
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyInput>
+    /**
+     * Filter which Notifications to update
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Notification upsert
+   */
+  export type NotificationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Notification to update in case it exists.
+     */
+    where: NotificationWhereUniqueInput
+    /**
+     * In case the Notification found by the `where` argument doesn't exist, create a new Notification with this data.
+     */
+    create: XOR<NotificationCreateInput, NotificationUncheckedCreateInput>
+    /**
+     * In case the Notification was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NotificationUpdateInput, NotificationUncheckedUpdateInput>
+  }
+
+  /**
+   * Notification delete
+   */
+  export type NotificationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    /**
+     * Filter which Notification to delete.
+     */
+    where: NotificationWhereUniqueInput
+  }
+
+  /**
+   * Notification deleteMany
+   */
+  export type NotificationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Notifications to delete
+     */
+    where?: NotificationWhereInput
+    /**
+     * Limit how many Notifications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Notification without action
+   */
+  export type NotificationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OAuth
+   */
+
+  export type AggregateOAuth = {
+    _count: OAuthCountAggregateOutputType | null
+    _avg: OAuthAvgAggregateOutputType | null
+    _sum: OAuthSumAggregateOutputType | null
+    _min: OAuthMinAggregateOutputType | null
+    _max: OAuthMaxAggregateOutputType | null
+  }
+
+  export type OAuthAvgAggregateOutputType = {
+    profileId: number | null
+    userId: number | null
+  }
+
+  export type OAuthSumAggregateOutputType = {
+    profileId: number | null
+    userId: number | null
+  }
+
+  export type OAuthMinAggregateOutputType = {
+    profileId: number | null
+    userId: number | null
+    provider: string | null
+    createdAt: Date | null
+    isActive: boolean | null
+  }
+
+  export type OAuthMaxAggregateOutputType = {
+    profileId: number | null
+    userId: number | null
+    provider: string | null
+    createdAt: Date | null
+    isActive: boolean | null
+  }
+
+  export type OAuthCountAggregateOutputType = {
+    profileId: number
+    userId: number
+    provider: number
+    createdAt: number
+    isActive: number
+    _all: number
+  }
+
+
+  export type OAuthAvgAggregateInputType = {
+    profileId?: true
+    userId?: true
+  }
+
+  export type OAuthSumAggregateInputType = {
+    profileId?: true
+    userId?: true
+  }
+
+  export type OAuthMinAggregateInputType = {
+    profileId?: true
+    userId?: true
+    provider?: true
+    createdAt?: true
+    isActive?: true
+  }
+
+  export type OAuthMaxAggregateInputType = {
+    profileId?: true
+    userId?: true
+    provider?: true
+    createdAt?: true
+    isActive?: true
+  }
+
+  export type OAuthCountAggregateInputType = {
+    profileId?: true
+    userId?: true
+    provider?: true
+    createdAt?: true
+    isActive?: true
+    _all?: true
+  }
+
+  export type OAuthAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OAuth to aggregate.
+     */
+    where?: OAuthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAuths to fetch.
+     */
+    orderBy?: OAuthOrderByWithRelationInput | OAuthOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OAuthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAuths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAuths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OAuths
+    **/
+    _count?: true | OAuthCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: OAuthAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OAuthSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OAuthMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OAuthMaxAggregateInputType
+  }
+
+  export type GetOAuthAggregateType<T extends OAuthAggregateArgs> = {
+        [P in keyof T & keyof AggregateOAuth]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOAuth[P]>
+      : GetScalarType<T[P], AggregateOAuth[P]>
+  }
+
+
+
+
+  export type OAuthGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OAuthWhereInput
+    orderBy?: OAuthOrderByWithAggregationInput | OAuthOrderByWithAggregationInput[]
+    by: OAuthScalarFieldEnum[] | OAuthScalarFieldEnum
+    having?: OAuthScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OAuthCountAggregateInputType | true
+    _avg?: OAuthAvgAggregateInputType
+    _sum?: OAuthSumAggregateInputType
+    _min?: OAuthMinAggregateInputType
+    _max?: OAuthMaxAggregateInputType
+  }
+
+  export type OAuthGroupByOutputType = {
+    profileId: number
+    userId: number
+    provider: string
+    createdAt: Date
+    isActive: boolean
+    _count: OAuthCountAggregateOutputType | null
+    _avg: OAuthAvgAggregateOutputType | null
+    _sum: OAuthSumAggregateOutputType | null
+    _min: OAuthMinAggregateOutputType | null
+    _max: OAuthMaxAggregateOutputType | null
+  }
+
+  type GetOAuthGroupByPayload<T extends OAuthGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OAuthGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OAuthGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OAuthGroupByOutputType[P]>
+            : GetScalarType<T[P], OAuthGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OAuthSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    profileId?: boolean
+    userId?: boolean
+    provider?: boolean
+    createdAt?: boolean
+    isActive?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["oAuth"]>
+
+  export type OAuthSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    profileId?: boolean
+    userId?: boolean
+    provider?: boolean
+    createdAt?: boolean
+    isActive?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["oAuth"]>
+
+  export type OAuthSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    profileId?: boolean
+    userId?: boolean
+    provider?: boolean
+    createdAt?: boolean
+    isActive?: boolean
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["oAuth"]>
+
+  export type OAuthSelectScalar = {
+    profileId?: boolean
+    userId?: boolean
+    provider?: boolean
+    createdAt?: boolean
+    isActive?: boolean
+  }
+
+  export type OAuthOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"profileId" | "userId" | "provider" | "createdAt" | "isActive", ExtArgs["result"]["oAuth"]>
+  export type OAuthInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type OAuthIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type OAuthIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    User?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $OAuthPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OAuth"
+    objects: {
+      User: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      profileId: number
+      userId: number
+      provider: string
+      createdAt: Date
+      isActive: boolean
+    }, ExtArgs["result"]["oAuth"]>
+    composites: {}
+  }
+
+  type OAuthGetPayload<S extends boolean | null | undefined | OAuthDefaultArgs> = $Result.GetResult<Prisma.$OAuthPayload, S>
+
+  type OAuthCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OAuthFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OAuthCountAggregateInputType | true
+    }
+
+  export interface OAuthDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OAuth'], meta: { name: 'OAuth' } }
+    /**
+     * Find zero or one OAuth that matches the filter.
+     * @param {OAuthFindUniqueArgs} args - Arguments to find a OAuth
+     * @example
+     * // Get one OAuth
+     * const oAuth = await prisma.oAuth.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OAuthFindUniqueArgs>(args: SelectSubset<T, OAuthFindUniqueArgs<ExtArgs>>): Prisma__OAuthClient<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OAuth that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OAuthFindUniqueOrThrowArgs} args - Arguments to find a OAuth
+     * @example
+     * // Get one OAuth
+     * const oAuth = await prisma.oAuth.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OAuthFindUniqueOrThrowArgs>(args: SelectSubset<T, OAuthFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OAuthClient<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OAuth that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthFindFirstArgs} args - Arguments to find a OAuth
+     * @example
+     * // Get one OAuth
+     * const oAuth = await prisma.oAuth.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OAuthFindFirstArgs>(args?: SelectSubset<T, OAuthFindFirstArgs<ExtArgs>>): Prisma__OAuthClient<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OAuth that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthFindFirstOrThrowArgs} args - Arguments to find a OAuth
+     * @example
+     * // Get one OAuth
+     * const oAuth = await prisma.oAuth.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OAuthFindFirstOrThrowArgs>(args?: SelectSubset<T, OAuthFindFirstOrThrowArgs<ExtArgs>>): Prisma__OAuthClient<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OAuths that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OAuths
+     * const oAuths = await prisma.oAuth.findMany()
+     * 
+     * // Get first 10 OAuths
+     * const oAuths = await prisma.oAuth.findMany({ take: 10 })
+     * 
+     * // Only select the `profileId`
+     * const oAuthWithProfileIdOnly = await prisma.oAuth.findMany({ select: { profileId: true } })
+     * 
+     */
+    findMany<T extends OAuthFindManyArgs>(args?: SelectSubset<T, OAuthFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OAuth.
+     * @param {OAuthCreateArgs} args - Arguments to create a OAuth.
+     * @example
+     * // Create one OAuth
+     * const OAuth = await prisma.oAuth.create({
+     *   data: {
+     *     // ... data to create a OAuth
+     *   }
+     * })
+     * 
+     */
+    create<T extends OAuthCreateArgs>(args: SelectSubset<T, OAuthCreateArgs<ExtArgs>>): Prisma__OAuthClient<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OAuths.
+     * @param {OAuthCreateManyArgs} args - Arguments to create many OAuths.
+     * @example
+     * // Create many OAuths
+     * const oAuth = await prisma.oAuth.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OAuthCreateManyArgs>(args?: SelectSubset<T, OAuthCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OAuths and returns the data saved in the database.
+     * @param {OAuthCreateManyAndReturnArgs} args - Arguments to create many OAuths.
+     * @example
+     * // Create many OAuths
+     * const oAuth = await prisma.oAuth.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OAuths and only return the `profileId`
+     * const oAuthWithProfileIdOnly = await prisma.oAuth.createManyAndReturn({
+     *   select: { profileId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OAuthCreateManyAndReturnArgs>(args?: SelectSubset<T, OAuthCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a OAuth.
+     * @param {OAuthDeleteArgs} args - Arguments to delete one OAuth.
+     * @example
+     * // Delete one OAuth
+     * const OAuth = await prisma.oAuth.delete({
+     *   where: {
+     *     // ... filter to delete one OAuth
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OAuthDeleteArgs>(args: SelectSubset<T, OAuthDeleteArgs<ExtArgs>>): Prisma__OAuthClient<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OAuth.
+     * @param {OAuthUpdateArgs} args - Arguments to update one OAuth.
+     * @example
+     * // Update one OAuth
+     * const oAuth = await prisma.oAuth.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OAuthUpdateArgs>(args: SelectSubset<T, OAuthUpdateArgs<ExtArgs>>): Prisma__OAuthClient<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OAuths.
+     * @param {OAuthDeleteManyArgs} args - Arguments to filter OAuths to delete.
+     * @example
+     * // Delete a few OAuths
+     * const { count } = await prisma.oAuth.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OAuthDeleteManyArgs>(args?: SelectSubset<T, OAuthDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OAuths.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OAuths
+     * const oAuth = await prisma.oAuth.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OAuthUpdateManyArgs>(args: SelectSubset<T, OAuthUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OAuths and returns the data updated in the database.
+     * @param {OAuthUpdateManyAndReturnArgs} args - Arguments to update many OAuths.
+     * @example
+     * // Update many OAuths
+     * const oAuth = await prisma.oAuth.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more OAuths and only return the `profileId`
+     * const oAuthWithProfileIdOnly = await prisma.oAuth.updateManyAndReturn({
+     *   select: { profileId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OAuthUpdateManyAndReturnArgs>(args: SelectSubset<T, OAuthUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one OAuth.
+     * @param {OAuthUpsertArgs} args - Arguments to update or create a OAuth.
+     * @example
+     * // Update or create a OAuth
+     * const oAuth = await prisma.oAuth.upsert({
+     *   create: {
+     *     // ... data to create a OAuth
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OAuth we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OAuthUpsertArgs>(args: SelectSubset<T, OAuthUpsertArgs<ExtArgs>>): Prisma__OAuthClient<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OAuths.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthCountArgs} args - Arguments to filter OAuths to count.
+     * @example
+     * // Count the number of OAuths
+     * const count = await prisma.oAuth.count({
+     *   where: {
+     *     // ... the filter for the OAuths we want to count
+     *   }
+     * })
+    **/
+    count<T extends OAuthCountArgs>(
+      args?: Subset<T, OAuthCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OAuthCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OAuth.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OAuthAggregateArgs>(args: Subset<T, OAuthAggregateArgs>): Prisma.PrismaPromise<GetOAuthAggregateType<T>>
+
+    /**
+     * Group by OAuth.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OAuthGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OAuthGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OAuthGroupByArgs['orderBy'] }
+        : { orderBy?: OAuthGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OAuthGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOAuthGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OAuth model
+   */
+  readonly fields: OAuthFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OAuth.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OAuthClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OAuth model
+   */
+  interface OAuthFieldRefs {
+    readonly profileId: FieldRef<"OAuth", 'Int'>
+    readonly userId: FieldRef<"OAuth", 'Int'>
+    readonly provider: FieldRef<"OAuth", 'String'>
+    readonly createdAt: FieldRef<"OAuth", 'DateTime'>
+    readonly isActive: FieldRef<"OAuth", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OAuth findUnique
+   */
+  export type OAuthFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthInclude<ExtArgs> | null
+    /**
+     * Filter, which OAuth to fetch.
+     */
+    where: OAuthWhereUniqueInput
+  }
+
+  /**
+   * OAuth findUniqueOrThrow
+   */
+  export type OAuthFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthInclude<ExtArgs> | null
+    /**
+     * Filter, which OAuth to fetch.
+     */
+    where: OAuthWhereUniqueInput
+  }
+
+  /**
+   * OAuth findFirst
+   */
+  export type OAuthFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthInclude<ExtArgs> | null
+    /**
+     * Filter, which OAuth to fetch.
+     */
+    where?: OAuthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAuths to fetch.
+     */
+    orderBy?: OAuthOrderByWithRelationInput | OAuthOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OAuths.
+     */
+    cursor?: OAuthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAuths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAuths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OAuths.
+     */
+    distinct?: OAuthScalarFieldEnum | OAuthScalarFieldEnum[]
+  }
+
+  /**
+   * OAuth findFirstOrThrow
+   */
+  export type OAuthFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthInclude<ExtArgs> | null
+    /**
+     * Filter, which OAuth to fetch.
+     */
+    where?: OAuthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAuths to fetch.
+     */
+    orderBy?: OAuthOrderByWithRelationInput | OAuthOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OAuths.
+     */
+    cursor?: OAuthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAuths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAuths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OAuths.
+     */
+    distinct?: OAuthScalarFieldEnum | OAuthScalarFieldEnum[]
+  }
+
+  /**
+   * OAuth findMany
+   */
+  export type OAuthFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthInclude<ExtArgs> | null
+    /**
+     * Filter, which OAuths to fetch.
+     */
+    where?: OAuthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OAuths to fetch.
+     */
+    orderBy?: OAuthOrderByWithRelationInput | OAuthOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OAuths.
+     */
+    cursor?: OAuthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OAuths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OAuths.
+     */
+    skip?: number
+    distinct?: OAuthScalarFieldEnum | OAuthScalarFieldEnum[]
+  }
+
+  /**
+   * OAuth create
+   */
+  export type OAuthCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OAuth.
+     */
+    data: XOR<OAuthCreateInput, OAuthUncheckedCreateInput>
+  }
+
+  /**
+   * OAuth createMany
+   */
+  export type OAuthCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OAuths.
+     */
+    data: OAuthCreateManyInput | OAuthCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OAuth createManyAndReturn
+   */
+  export type OAuthCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * The data used to create many OAuths.
+     */
+    data: OAuthCreateManyInput | OAuthCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OAuth update
+   */
+  export type OAuthUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OAuth.
+     */
+    data: XOR<OAuthUpdateInput, OAuthUncheckedUpdateInput>
+    /**
+     * Choose, which OAuth to update.
+     */
+    where: OAuthWhereUniqueInput
+  }
+
+  /**
+   * OAuth updateMany
+   */
+  export type OAuthUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OAuths.
+     */
+    data: XOR<OAuthUpdateManyMutationInput, OAuthUncheckedUpdateManyInput>
+    /**
+     * Filter which OAuths to update
+     */
+    where?: OAuthWhereInput
+    /**
+     * Limit how many OAuths to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OAuth updateManyAndReturn
+   */
+  export type OAuthUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * The data used to update OAuths.
+     */
+    data: XOR<OAuthUpdateManyMutationInput, OAuthUncheckedUpdateManyInput>
+    /**
+     * Filter which OAuths to update
+     */
+    where?: OAuthWhereInput
+    /**
+     * Limit how many OAuths to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OAuth upsert
+   */
+  export type OAuthUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OAuth to update in case it exists.
+     */
+    where: OAuthWhereUniqueInput
+    /**
+     * In case the OAuth found by the `where` argument doesn't exist, create a new OAuth with this data.
+     */
+    create: XOR<OAuthCreateInput, OAuthUncheckedCreateInput>
+    /**
+     * In case the OAuth was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OAuthUpdateInput, OAuthUncheckedUpdateInput>
+  }
+
+  /**
+   * OAuth delete
+   */
+  export type OAuthDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthInclude<ExtArgs> | null
+    /**
+     * Filter which OAuth to delete.
+     */
+    where: OAuthWhereUniqueInput
+  }
+
+  /**
+   * OAuth deleteMany
+   */
+  export type OAuthDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OAuths to delete
+     */
+    where?: OAuthWhereInput
+    /**
+     * Limit how many OAuths to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OAuth without action
+   */
+  export type OAuthDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OAuth
+     */
+    select?: OAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OAuth
+     */
+    omit?: OAuthOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OAuthInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -17450,6 +19973,29 @@ export namespace Prisma {
   export type LikeScalarFieldEnum = (typeof LikeScalarFieldEnum)[keyof typeof LikeScalarFieldEnum]
 
 
+  export const NotificationScalarFieldEnum: {
+    id: 'id',
+    currentUserId: 'currentUserId',
+    otherUserId: 'otherUserId',
+    type: 'type',
+    isActive: 'isActive',
+    createdAt: 'createdAt'
+  };
+
+  export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+  export const OAuthScalarFieldEnum: {
+    profileId: 'profileId',
+    userId: 'userId',
+    provider: 'provider',
+    createdAt: 'createdAt',
+    isActive: 'isActive'
+  };
+
+  export type OAuthScalarFieldEnum = (typeof OAuthScalarFieldEnum)[keyof typeof OAuthScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -17571,6 +20117,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'notificationType'
+   */
+  export type EnumnotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'notificationType'>
+    
+
+
+  /**
+   * Reference to a field of type 'notificationType[]'
+   */
+  export type ListEnumnotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'notificationType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -17594,7 +20154,7 @@ export namespace Prisma {
     id?: IntFilter<"User"> | number
     fullname?: StringFilter<"User"> | string
     username?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
+    email?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     about?: StringNullableFilter<"User"> | string | null
     bio?: StringNullableFilter<"User"> | string | null
@@ -17616,13 +20176,16 @@ export namespace Prisma {
     Post?: PostListRelationFilter
     Comment?: CommentListRelationFilter
     Like?: LikeListRelationFilter
+    CurrentUser?: NotificationListRelationFilter
+    OtherUser?: NotificationListRelationFilter
+    OAuths?: OAuthListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     fullname?: SortOrder
     username?: SortOrder
-    email?: SortOrder
+    email?: SortOrderInput | SortOrder
     password?: SortOrder
     about?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
@@ -17644,6 +20207,9 @@ export namespace Prisma {
     Post?: PostOrderByRelationAggregateInput
     Comment?: CommentOrderByRelationAggregateInput
     Like?: LikeOrderByRelationAggregateInput
+    CurrentUser?: NotificationOrderByRelationAggregateInput
+    OtherUser?: NotificationOrderByRelationAggregateInput
+    OAuths?: OAuthOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -17675,13 +20241,16 @@ export namespace Prisma {
     Post?: PostListRelationFilter
     Comment?: CommentListRelationFilter
     Like?: LikeListRelationFilter
+    CurrentUser?: NotificationListRelationFilter
+    OtherUser?: NotificationListRelationFilter
+    OAuths?: OAuthListRelationFilter
   }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     fullname?: SortOrder
     username?: SortOrder
-    email?: SortOrder
+    email?: SortOrderInput | SortOrder
     password?: SortOrder
     about?: SortOrderInput | SortOrder
     bio?: SortOrderInput | SortOrder
@@ -17705,7 +20274,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"User"> | number
     fullname?: StringWithAggregatesFilter<"User"> | string
     username?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
+    email?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringWithAggregatesFilter<"User"> | string
     about?: StringNullableWithAggregatesFilter<"User"> | string | null
     bio?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -18504,10 +21073,132 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Like"> | Date | string
   }
 
+  export type NotificationWhereInput = {
+    AND?: NotificationWhereInput | NotificationWhereInput[]
+    OR?: NotificationWhereInput[]
+    NOT?: NotificationWhereInput | NotificationWhereInput[]
+    id?: IntFilter<"Notification"> | number
+    currentUserId?: IntFilter<"Notification"> | number
+    otherUserId?: IntFilter<"Notification"> | number
+    type?: EnumnotificationTypeFilter<"Notification"> | $Enums.notificationType
+    isActive?: BoolFilter<"Notification"> | boolean
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    CurrentUser?: XOR<UserScalarRelationFilter, UserWhereInput>
+    OtherUser?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type NotificationOrderByWithRelationInput = {
+    id?: SortOrder
+    currentUserId?: SortOrder
+    otherUserId?: SortOrder
+    type?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    CurrentUser?: UserOrderByWithRelationInput
+    OtherUser?: UserOrderByWithRelationInput
+  }
+
+  export type NotificationWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: NotificationWhereInput | NotificationWhereInput[]
+    OR?: NotificationWhereInput[]
+    NOT?: NotificationWhereInput | NotificationWhereInput[]
+    currentUserId?: IntFilter<"Notification"> | number
+    otherUserId?: IntFilter<"Notification"> | number
+    type?: EnumnotificationTypeFilter<"Notification"> | $Enums.notificationType
+    isActive?: BoolFilter<"Notification"> | boolean
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+    CurrentUser?: XOR<UserScalarRelationFilter, UserWhereInput>
+    OtherUser?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type NotificationOrderByWithAggregationInput = {
+    id?: SortOrder
+    currentUserId?: SortOrder
+    otherUserId?: SortOrder
+    type?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    _count?: NotificationCountOrderByAggregateInput
+    _avg?: NotificationAvgOrderByAggregateInput
+    _max?: NotificationMaxOrderByAggregateInput
+    _min?: NotificationMinOrderByAggregateInput
+    _sum?: NotificationSumOrderByAggregateInput
+  }
+
+  export type NotificationScalarWhereWithAggregatesInput = {
+    AND?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
+    OR?: NotificationScalarWhereWithAggregatesInput[]
+    NOT?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Notification"> | number
+    currentUserId?: IntWithAggregatesFilter<"Notification"> | number
+    otherUserId?: IntWithAggregatesFilter<"Notification"> | number
+    type?: EnumnotificationTypeWithAggregatesFilter<"Notification"> | $Enums.notificationType
+    isActive?: BoolWithAggregatesFilter<"Notification"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
+  }
+
+  export type OAuthWhereInput = {
+    AND?: OAuthWhereInput | OAuthWhereInput[]
+    OR?: OAuthWhereInput[]
+    NOT?: OAuthWhereInput | OAuthWhereInput[]
+    profileId?: IntFilter<"OAuth"> | number
+    userId?: IntFilter<"OAuth"> | number
+    provider?: StringFilter<"OAuth"> | string
+    createdAt?: DateTimeFilter<"OAuth"> | Date | string
+    isActive?: BoolFilter<"OAuth"> | boolean
+    User?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type OAuthOrderByWithRelationInput = {
+    profileId?: SortOrder
+    userId?: SortOrder
+    provider?: SortOrder
+    createdAt?: SortOrder
+    isActive?: SortOrder
+    User?: UserOrderByWithRelationInput
+  }
+
+  export type OAuthWhereUniqueInput = Prisma.AtLeast<{
+    profileId?: number
+    AND?: OAuthWhereInput | OAuthWhereInput[]
+    OR?: OAuthWhereInput[]
+    NOT?: OAuthWhereInput | OAuthWhereInput[]
+    userId?: IntFilter<"OAuth"> | number
+    provider?: StringFilter<"OAuth"> | string
+    createdAt?: DateTimeFilter<"OAuth"> | Date | string
+    isActive?: BoolFilter<"OAuth"> | boolean
+    User?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "profileId">
+
+  export type OAuthOrderByWithAggregationInput = {
+    profileId?: SortOrder
+    userId?: SortOrder
+    provider?: SortOrder
+    createdAt?: SortOrder
+    isActive?: SortOrder
+    _count?: OAuthCountOrderByAggregateInput
+    _avg?: OAuthAvgOrderByAggregateInput
+    _max?: OAuthMaxOrderByAggregateInput
+    _min?: OAuthMinOrderByAggregateInput
+    _sum?: OAuthSumOrderByAggregateInput
+  }
+
+  export type OAuthScalarWhereWithAggregatesInput = {
+    AND?: OAuthScalarWhereWithAggregatesInput | OAuthScalarWhereWithAggregatesInput[]
+    OR?: OAuthScalarWhereWithAggregatesInput[]
+    NOT?: OAuthScalarWhereWithAggregatesInput | OAuthScalarWhereWithAggregatesInput[]
+    profileId?: IntWithAggregatesFilter<"OAuth"> | number
+    userId?: IntWithAggregatesFilter<"OAuth"> | number
+    provider?: StringWithAggregatesFilter<"OAuth"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"OAuth"> | Date | string
+    isActive?: BoolWithAggregatesFilter<"OAuth"> | boolean
+  }
+
   export type UserCreateInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -18529,13 +21220,16 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -18557,12 +21251,15 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18584,13 +21281,16 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18612,13 +21312,16 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -18633,7 +21336,7 @@ export namespace Prisma {
   export type UserUpdateManyMutationInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18649,7 +21352,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19397,6 +22100,116 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NotificationCreateInput = {
+    type: $Enums.notificationType
+    isActive?: boolean
+    createdAt?: Date | string
+    CurrentUser: UserCreateNestedOneWithoutCurrentUserInput
+    OtherUser: UserCreateNestedOneWithoutOtherUserInput
+  }
+
+  export type NotificationUncheckedCreateInput = {
+    id?: number
+    currentUserId: number
+    otherUserId: number
+    type: $Enums.notificationType
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type NotificationUpdateInput = {
+    type?: EnumnotificationTypeFieldUpdateOperationsInput | $Enums.notificationType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CurrentUser?: UserUpdateOneRequiredWithoutCurrentUserNestedInput
+    OtherUser?: UserUpdateOneRequiredWithoutOtherUserNestedInput
+  }
+
+  export type NotificationUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    currentUserId?: IntFieldUpdateOperationsInput | number
+    otherUserId?: IntFieldUpdateOperationsInput | number
+    type?: EnumnotificationTypeFieldUpdateOperationsInput | $Enums.notificationType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationCreateManyInput = {
+    id?: number
+    currentUserId: number
+    otherUserId: number
+    type: $Enums.notificationType
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type NotificationUpdateManyMutationInput = {
+    type?: EnumnotificationTypeFieldUpdateOperationsInput | $Enums.notificationType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    currentUserId?: IntFieldUpdateOperationsInput | number
+    otherUserId?: IntFieldUpdateOperationsInput | number
+    type?: EnumnotificationTypeFieldUpdateOperationsInput | $Enums.notificationType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OAuthCreateInput = {
+    provider: string
+    createdAt?: Date | string
+    isActive?: boolean
+    User: UserCreateNestedOneWithoutOAuthsInput
+  }
+
+  export type OAuthUncheckedCreateInput = {
+    profileId?: number
+    userId: number
+    provider: string
+    createdAt?: Date | string
+    isActive?: boolean
+  }
+
+  export type OAuthUpdateInput = {
+    provider?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    User?: UserUpdateOneRequiredWithoutOAuthsNestedInput
+  }
+
+  export type OAuthUncheckedUpdateInput = {
+    profileId?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    provider?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type OAuthCreateManyInput = {
+    profileId?: number
+    userId: number
+    provider: string
+    createdAt?: Date | string
+    isActive?: boolean
+  }
+
+  export type OAuthUpdateManyMutationInput = {
+    provider?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type OAuthUncheckedUpdateManyInput = {
+    profileId?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    provider?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -19519,6 +22332,18 @@ export namespace Prisma {
     none?: LikeWhereInput
   }
 
+  export type NotificationListRelationFilter = {
+    every?: NotificationWhereInput
+    some?: NotificationWhereInput
+    none?: NotificationWhereInput
+  }
+
+  export type OAuthListRelationFilter = {
+    every?: OAuthWhereInput
+    some?: OAuthWhereInput
+    none?: OAuthWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -19557,6 +22382,14 @@ export namespace Prisma {
   }
 
   export type LikeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type NotificationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OAuthOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -20306,6 +23139,96 @@ export namespace Prisma {
     audienceId?: SortOrder
   }
 
+  export type EnumnotificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.notificationType | EnumnotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.notificationType[] | ListEnumnotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.notificationType[] | ListEnumnotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumnotificationTypeFilter<$PrismaModel> | $Enums.notificationType
+  }
+
+  export type NotificationCountOrderByAggregateInput = {
+    id?: SortOrder
+    currentUserId?: SortOrder
+    otherUserId?: SortOrder
+    type?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type NotificationAvgOrderByAggregateInput = {
+    id?: SortOrder
+    currentUserId?: SortOrder
+    otherUserId?: SortOrder
+  }
+
+  export type NotificationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    currentUserId?: SortOrder
+    otherUserId?: SortOrder
+    type?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type NotificationMinOrderByAggregateInput = {
+    id?: SortOrder
+    currentUserId?: SortOrder
+    otherUserId?: SortOrder
+    type?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type NotificationSumOrderByAggregateInput = {
+    id?: SortOrder
+    currentUserId?: SortOrder
+    otherUserId?: SortOrder
+  }
+
+  export type EnumnotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.notificationType | EnumnotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.notificationType[] | ListEnumnotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.notificationType[] | ListEnumnotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumnotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.notificationType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumnotificationTypeFilter<$PrismaModel>
+    _max?: NestedEnumnotificationTypeFilter<$PrismaModel>
+  }
+
+  export type OAuthCountOrderByAggregateInput = {
+    profileId?: SortOrder
+    userId?: SortOrder
+    provider?: SortOrder
+    createdAt?: SortOrder
+    isActive?: SortOrder
+  }
+
+  export type OAuthAvgOrderByAggregateInput = {
+    profileId?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type OAuthMaxOrderByAggregateInput = {
+    profileId?: SortOrder
+    userId?: SortOrder
+    provider?: SortOrder
+    createdAt?: SortOrder
+    isActive?: SortOrder
+  }
+
+  export type OAuthMinOrderByAggregateInput = {
+    profileId?: SortOrder
+    userId?: SortOrder
+    provider?: SortOrder
+    createdAt?: SortOrder
+    isActive?: SortOrder
+  }
+
+  export type OAuthSumOrderByAggregateInput = {
+    profileId?: SortOrder
+    userId?: SortOrder
+  }
+
   export type MessageCreateNestedManyWithoutUserInput = {
     create?: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput> | MessageCreateWithoutUserInput[] | MessageUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutUserInput | MessageCreateOrConnectWithoutUserInput[]
@@ -20390,6 +23313,27 @@ export namespace Prisma {
     connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
   }
 
+  export type NotificationCreateNestedManyWithoutCurrentUserInput = {
+    create?: XOR<NotificationCreateWithoutCurrentUserInput, NotificationUncheckedCreateWithoutCurrentUserInput> | NotificationCreateWithoutCurrentUserInput[] | NotificationUncheckedCreateWithoutCurrentUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutCurrentUserInput | NotificationCreateOrConnectWithoutCurrentUserInput[]
+    createMany?: NotificationCreateManyCurrentUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type NotificationCreateNestedManyWithoutOtherUserInput = {
+    create?: XOR<NotificationCreateWithoutOtherUserInput, NotificationUncheckedCreateWithoutOtherUserInput> | NotificationCreateWithoutOtherUserInput[] | NotificationUncheckedCreateWithoutOtherUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutOtherUserInput | NotificationCreateOrConnectWithoutOtherUserInput[]
+    createMany?: NotificationCreateManyOtherUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type OAuthCreateNestedManyWithoutUserInput = {
+    create?: XOR<OAuthCreateWithoutUserInput, OAuthUncheckedCreateWithoutUserInput> | OAuthCreateWithoutUserInput[] | OAuthUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OAuthCreateOrConnectWithoutUserInput | OAuthCreateOrConnectWithoutUserInput[]
+    createMany?: OAuthCreateManyUserInputEnvelope
+    connect?: OAuthWhereUniqueInput | OAuthWhereUniqueInput[]
+  }
+
   export type MessageUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<MessageCreateWithoutUserInput, MessageUncheckedCreateWithoutUserInput> | MessageCreateWithoutUserInput[] | MessageUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MessageCreateOrConnectWithoutUserInput | MessageCreateOrConnectWithoutUserInput[]
@@ -20472,6 +23416,27 @@ export namespace Prisma {
     connectOrCreate?: LikeCreateOrConnectWithoutUserInput | LikeCreateOrConnectWithoutUserInput[]
     createMany?: LikeCreateManyUserInputEnvelope
     connect?: LikeWhereUniqueInput | LikeWhereUniqueInput[]
+  }
+
+  export type NotificationUncheckedCreateNestedManyWithoutCurrentUserInput = {
+    create?: XOR<NotificationCreateWithoutCurrentUserInput, NotificationUncheckedCreateWithoutCurrentUserInput> | NotificationCreateWithoutCurrentUserInput[] | NotificationUncheckedCreateWithoutCurrentUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutCurrentUserInput | NotificationCreateOrConnectWithoutCurrentUserInput[]
+    createMany?: NotificationCreateManyCurrentUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type NotificationUncheckedCreateNestedManyWithoutOtherUserInput = {
+    create?: XOR<NotificationCreateWithoutOtherUserInput, NotificationUncheckedCreateWithoutOtherUserInput> | NotificationCreateWithoutOtherUserInput[] | NotificationUncheckedCreateWithoutOtherUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutOtherUserInput | NotificationCreateOrConnectWithoutOtherUserInput[]
+    createMany?: NotificationCreateManyOtherUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
+  export type OAuthUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<OAuthCreateWithoutUserInput, OAuthUncheckedCreateWithoutUserInput> | OAuthCreateWithoutUserInput[] | OAuthUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OAuthCreateOrConnectWithoutUserInput | OAuthCreateOrConnectWithoutUserInput[]
+    createMany?: OAuthCreateManyUserInputEnvelope
+    connect?: OAuthWhereUniqueInput | OAuthWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -20662,6 +23627,48 @@ export namespace Prisma {
     deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[]
   }
 
+  export type NotificationUpdateManyWithoutCurrentUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutCurrentUserInput, NotificationUncheckedCreateWithoutCurrentUserInput> | NotificationCreateWithoutCurrentUserInput[] | NotificationUncheckedCreateWithoutCurrentUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutCurrentUserInput | NotificationCreateOrConnectWithoutCurrentUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutCurrentUserInput | NotificationUpsertWithWhereUniqueWithoutCurrentUserInput[]
+    createMany?: NotificationCreateManyCurrentUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutCurrentUserInput | NotificationUpdateWithWhereUniqueWithoutCurrentUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutCurrentUserInput | NotificationUpdateManyWithWhereWithoutCurrentUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type NotificationUpdateManyWithoutOtherUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutOtherUserInput, NotificationUncheckedCreateWithoutOtherUserInput> | NotificationCreateWithoutOtherUserInput[] | NotificationUncheckedCreateWithoutOtherUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutOtherUserInput | NotificationCreateOrConnectWithoutOtherUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutOtherUserInput | NotificationUpsertWithWhereUniqueWithoutOtherUserInput[]
+    createMany?: NotificationCreateManyOtherUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutOtherUserInput | NotificationUpdateWithWhereUniqueWithoutOtherUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutOtherUserInput | NotificationUpdateManyWithWhereWithoutOtherUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type OAuthUpdateManyWithoutUserNestedInput = {
+    create?: XOR<OAuthCreateWithoutUserInput, OAuthUncheckedCreateWithoutUserInput> | OAuthCreateWithoutUserInput[] | OAuthUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OAuthCreateOrConnectWithoutUserInput | OAuthCreateOrConnectWithoutUserInput[]
+    upsert?: OAuthUpsertWithWhereUniqueWithoutUserInput | OAuthUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: OAuthCreateManyUserInputEnvelope
+    set?: OAuthWhereUniqueInput | OAuthWhereUniqueInput[]
+    disconnect?: OAuthWhereUniqueInput | OAuthWhereUniqueInput[]
+    delete?: OAuthWhereUniqueInput | OAuthWhereUniqueInput[]
+    connect?: OAuthWhereUniqueInput | OAuthWhereUniqueInput[]
+    update?: OAuthUpdateWithWhereUniqueWithoutUserInput | OAuthUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: OAuthUpdateManyWithWhereWithoutUserInput | OAuthUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: OAuthScalarWhereInput | OAuthScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -20836,6 +23843,48 @@ export namespace Prisma {
     update?: LikeUpdateWithWhereUniqueWithoutUserInput | LikeUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: LikeUpdateManyWithWhereWithoutUserInput | LikeUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: LikeScalarWhereInput | LikeScalarWhereInput[]
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutCurrentUserInput, NotificationUncheckedCreateWithoutCurrentUserInput> | NotificationCreateWithoutCurrentUserInput[] | NotificationUncheckedCreateWithoutCurrentUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutCurrentUserInput | NotificationCreateOrConnectWithoutCurrentUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutCurrentUserInput | NotificationUpsertWithWhereUniqueWithoutCurrentUserInput[]
+    createMany?: NotificationCreateManyCurrentUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutCurrentUserInput | NotificationUpdateWithWhereUniqueWithoutCurrentUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutCurrentUserInput | NotificationUpdateManyWithWhereWithoutCurrentUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutOtherUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutOtherUserInput, NotificationUncheckedCreateWithoutOtherUserInput> | NotificationCreateWithoutOtherUserInput[] | NotificationUncheckedCreateWithoutOtherUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutOtherUserInput | NotificationCreateOrConnectWithoutOtherUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutOtherUserInput | NotificationUpsertWithWhereUniqueWithoutOtherUserInput[]
+    createMany?: NotificationCreateManyOtherUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutOtherUserInput | NotificationUpdateWithWhereUniqueWithoutOtherUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutOtherUserInput | NotificationUpdateManyWithWhereWithoutOtherUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
+  export type OAuthUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<OAuthCreateWithoutUserInput, OAuthUncheckedCreateWithoutUserInput> | OAuthCreateWithoutUserInput[] | OAuthUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OAuthCreateOrConnectWithoutUserInput | OAuthCreateOrConnectWithoutUserInput[]
+    upsert?: OAuthUpsertWithWhereUniqueWithoutUserInput | OAuthUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: OAuthCreateManyUserInputEnvelope
+    set?: OAuthWhereUniqueInput | OAuthWhereUniqueInput[]
+    disconnect?: OAuthWhereUniqueInput | OAuthWhereUniqueInput[]
+    delete?: OAuthWhereUniqueInput | OAuthWhereUniqueInput[]
+    connect?: OAuthWhereUniqueInput | OAuthWhereUniqueInput[]
+    update?: OAuthUpdateWithWhereUniqueWithoutUserInput | OAuthUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: OAuthUpdateManyWithWhereWithoutUserInput | OAuthUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: OAuthScalarWhereInput | OAuthScalarWhereInput[]
   }
 
   export type ConversationCreateuserIdsInput = {
@@ -21373,6 +24422,52 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLikeInput, UserUpdateWithoutLikeInput>, UserUncheckedUpdateWithoutLikeInput>
   }
 
+  export type UserCreateNestedOneWithoutCurrentUserInput = {
+    create?: XOR<UserCreateWithoutCurrentUserInput, UserUncheckedCreateWithoutCurrentUserInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCurrentUserInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutOtherUserInput = {
+    create?: XOR<UserCreateWithoutOtherUserInput, UserUncheckedCreateWithoutOtherUserInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOtherUserInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumnotificationTypeFieldUpdateOperationsInput = {
+    set?: $Enums.notificationType
+  }
+
+  export type UserUpdateOneRequiredWithoutCurrentUserNestedInput = {
+    create?: XOR<UserCreateWithoutCurrentUserInput, UserUncheckedCreateWithoutCurrentUserInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCurrentUserInput
+    upsert?: UserUpsertWithoutCurrentUserInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCurrentUserInput, UserUpdateWithoutCurrentUserInput>, UserUncheckedUpdateWithoutCurrentUserInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutOtherUserNestedInput = {
+    create?: XOR<UserCreateWithoutOtherUserInput, UserUncheckedCreateWithoutOtherUserInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOtherUserInput
+    upsert?: UserUpsertWithoutOtherUserInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOtherUserInput, UserUpdateWithoutOtherUserInput>, UserUncheckedUpdateWithoutOtherUserInput>
+  }
+
+  export type UserCreateNestedOneWithoutOAuthsInput = {
+    create?: XOR<UserCreateWithoutOAuthsInput, UserUncheckedCreateWithoutOAuthsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOAuthsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutOAuthsNestedInput = {
+    create?: XOR<UserCreateWithoutOAuthsInput, UserUncheckedCreateWithoutOAuthsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOAuthsInput
+    upsert?: UserUpsertWithoutOAuthsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOAuthsInput, UserUpdateWithoutOAuthsInput>, UserUncheckedUpdateWithoutOAuthsInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -21623,6 +24718,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumFriendStatusFilter<$PrismaModel>
     _max?: NestedEnumFriendStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumnotificationTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.notificationType | EnumnotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.notificationType[] | ListEnumnotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.notificationType[] | ListEnumnotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumnotificationTypeFilter<$PrismaModel> | $Enums.notificationType
+  }
+
+  export type NestedEnumnotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.notificationType | EnumnotificationTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.notificationType[] | ListEnumnotificationTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.notificationType[] | ListEnumnotificationTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumnotificationTypeWithAggregatesFilter<$PrismaModel> | $Enums.notificationType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumnotificationTypeFilter<$PrismaModel>
+    _max?: NestedEnumnotificationTypeFilter<$PrismaModel>
   }
 
   export type MessageCreateWithoutUserInput = {
@@ -21943,6 +25055,79 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type NotificationCreateWithoutCurrentUserInput = {
+    type: $Enums.notificationType
+    isActive?: boolean
+    createdAt?: Date | string
+    OtherUser: UserCreateNestedOneWithoutOtherUserInput
+  }
+
+  export type NotificationUncheckedCreateWithoutCurrentUserInput = {
+    id?: number
+    otherUserId: number
+    type: $Enums.notificationType
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type NotificationCreateOrConnectWithoutCurrentUserInput = {
+    where: NotificationWhereUniqueInput
+    create: XOR<NotificationCreateWithoutCurrentUserInput, NotificationUncheckedCreateWithoutCurrentUserInput>
+  }
+
+  export type NotificationCreateManyCurrentUserInputEnvelope = {
+    data: NotificationCreateManyCurrentUserInput | NotificationCreateManyCurrentUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type NotificationCreateWithoutOtherUserInput = {
+    type: $Enums.notificationType
+    isActive?: boolean
+    createdAt?: Date | string
+    CurrentUser: UserCreateNestedOneWithoutCurrentUserInput
+  }
+
+  export type NotificationUncheckedCreateWithoutOtherUserInput = {
+    id?: number
+    currentUserId: number
+    type: $Enums.notificationType
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type NotificationCreateOrConnectWithoutOtherUserInput = {
+    where: NotificationWhereUniqueInput
+    create: XOR<NotificationCreateWithoutOtherUserInput, NotificationUncheckedCreateWithoutOtherUserInput>
+  }
+
+  export type NotificationCreateManyOtherUserInputEnvelope = {
+    data: NotificationCreateManyOtherUserInput | NotificationCreateManyOtherUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OAuthCreateWithoutUserInput = {
+    provider: string
+    createdAt?: Date | string
+    isActive?: boolean
+  }
+
+  export type OAuthUncheckedCreateWithoutUserInput = {
+    profileId?: number
+    provider: string
+    createdAt?: Date | string
+    isActive?: boolean
+  }
+
+  export type OAuthCreateOrConnectWithoutUserInput = {
+    where: OAuthWhereUniqueInput
+    create: XOR<OAuthCreateWithoutUserInput, OAuthUncheckedCreateWithoutUserInput>
+  }
+
+  export type OAuthCreateManyUserInputEnvelope = {
+    data: OAuthCreateManyUserInput | OAuthCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type MessageUpsertWithWhereUniqueWithoutUserInput = {
     where: MessageWhereUniqueInput
     update: XOR<MessageUpdateWithoutUserInput, MessageUncheckedUpdateWithoutUserInput>
@@ -22246,6 +25431,77 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Like"> | Date | string
   }
 
+  export type NotificationUpsertWithWhereUniqueWithoutCurrentUserInput = {
+    where: NotificationWhereUniqueInput
+    update: XOR<NotificationUpdateWithoutCurrentUserInput, NotificationUncheckedUpdateWithoutCurrentUserInput>
+    create: XOR<NotificationCreateWithoutCurrentUserInput, NotificationUncheckedCreateWithoutCurrentUserInput>
+  }
+
+  export type NotificationUpdateWithWhereUniqueWithoutCurrentUserInput = {
+    where: NotificationWhereUniqueInput
+    data: XOR<NotificationUpdateWithoutCurrentUserInput, NotificationUncheckedUpdateWithoutCurrentUserInput>
+  }
+
+  export type NotificationUpdateManyWithWhereWithoutCurrentUserInput = {
+    where: NotificationScalarWhereInput
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutCurrentUserInput>
+  }
+
+  export type NotificationScalarWhereInput = {
+    AND?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    OR?: NotificationScalarWhereInput[]
+    NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    id?: IntFilter<"Notification"> | number
+    currentUserId?: IntFilter<"Notification"> | number
+    otherUserId?: IntFilter<"Notification"> | number
+    type?: EnumnotificationTypeFilter<"Notification"> | $Enums.notificationType
+    isActive?: BoolFilter<"Notification"> | boolean
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+  }
+
+  export type NotificationUpsertWithWhereUniqueWithoutOtherUserInput = {
+    where: NotificationWhereUniqueInput
+    update: XOR<NotificationUpdateWithoutOtherUserInput, NotificationUncheckedUpdateWithoutOtherUserInput>
+    create: XOR<NotificationCreateWithoutOtherUserInput, NotificationUncheckedCreateWithoutOtherUserInput>
+  }
+
+  export type NotificationUpdateWithWhereUniqueWithoutOtherUserInput = {
+    where: NotificationWhereUniqueInput
+    data: XOR<NotificationUpdateWithoutOtherUserInput, NotificationUncheckedUpdateWithoutOtherUserInput>
+  }
+
+  export type NotificationUpdateManyWithWhereWithoutOtherUserInput = {
+    where: NotificationScalarWhereInput
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutOtherUserInput>
+  }
+
+  export type OAuthUpsertWithWhereUniqueWithoutUserInput = {
+    where: OAuthWhereUniqueInput
+    update: XOR<OAuthUpdateWithoutUserInput, OAuthUncheckedUpdateWithoutUserInput>
+    create: XOR<OAuthCreateWithoutUserInput, OAuthUncheckedCreateWithoutUserInput>
+  }
+
+  export type OAuthUpdateWithWhereUniqueWithoutUserInput = {
+    where: OAuthWhereUniqueInput
+    data: XOR<OAuthUpdateWithoutUserInput, OAuthUncheckedUpdateWithoutUserInput>
+  }
+
+  export type OAuthUpdateManyWithWhereWithoutUserInput = {
+    where: OAuthScalarWhereInput
+    data: XOR<OAuthUpdateManyMutationInput, OAuthUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type OAuthScalarWhereInput = {
+    AND?: OAuthScalarWhereInput | OAuthScalarWhereInput[]
+    OR?: OAuthScalarWhereInput[]
+    NOT?: OAuthScalarWhereInput | OAuthScalarWhereInput[]
+    profileId?: IntFilter<"OAuth"> | number
+    userId?: IntFilter<"OAuth"> | number
+    provider?: StringFilter<"OAuth"> | string
+    createdAt?: DateTimeFilter<"OAuth"> | Date | string
+    isActive?: BoolFilter<"OAuth"> | boolean
+  }
+
   export type MessageCreateWithoutConversationInput = {
     message: string
     isSeen?: boolean
@@ -22303,7 +25559,7 @@ export namespace Prisma {
   export type UserCreateWithoutConversationInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -22324,13 +25580,16 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutConversationInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -22351,6 +25610,9 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutConversationInput = {
@@ -22404,7 +25666,7 @@ export namespace Prisma {
   export type UserUpdateWithoutConversationInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22425,13 +25687,16 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversationInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22452,6 +25717,9 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ConversationCreateWithoutMessagesInput = {
@@ -22483,7 +25751,7 @@ export namespace Prisma {
   export type UserCreateWithoutMessagesInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -22504,13 +25772,16 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMessagesInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -22531,6 +25802,9 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMessagesInput = {
@@ -22609,7 +25883,7 @@ export namespace Prisma {
   export type UserUpdateWithoutMessagesInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22630,13 +25904,16 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMessagesInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22657,6 +25934,9 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MessageMediaUpsertWithWhereUniqueWithoutMessageInput = {
@@ -22716,7 +25996,7 @@ export namespace Prisma {
   export type UserCreateWithoutParticipantInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -22737,13 +26017,16 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutParticipantInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -22764,6 +26047,9 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutParticipantInput = {
@@ -22817,7 +26103,7 @@ export namespace Prisma {
   export type UserUpdateWithoutParticipantInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22838,13 +26124,16 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutParticipantInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22865,6 +26154,9 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MessageCreateWithoutMediaInput = {
@@ -22928,7 +26220,7 @@ export namespace Prisma {
   export type UserCreateWithoutSenderInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -22949,13 +26241,16 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSenderInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -22976,6 +26271,9 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSenderInput = {
@@ -22986,7 +26284,7 @@ export namespace Prisma {
   export type UserCreateWithoutReceiverInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23007,13 +26305,16 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReceiverInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23034,6 +26335,9 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReceiverInput = {
@@ -23055,7 +26359,7 @@ export namespace Prisma {
   export type UserUpdateWithoutSenderInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23076,13 +26380,16 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSenderInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23103,6 +26410,9 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutReceiverInput = {
@@ -23119,7 +26429,7 @@ export namespace Prisma {
   export type UserUpdateWithoutReceiverInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23140,13 +26450,16 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReceiverInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23167,12 +26480,15 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutFriendInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23193,13 +26509,16 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFriendInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23220,6 +26539,9 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFriendInput = {
@@ -23230,7 +26552,7 @@ export namespace Prisma {
   export type UserCreateWithoutLoginUserInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23251,13 +26573,16 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLoginUserInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23278,6 +26603,9 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLoginUserInput = {
@@ -23299,7 +26627,7 @@ export namespace Prisma {
   export type UserUpdateWithoutFriendInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23320,13 +26648,16 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFriendInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23347,6 +26678,9 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutLoginUserInput = {
@@ -23363,7 +26697,7 @@ export namespace Prisma {
   export type UserUpdateWithoutLoginUserInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23384,13 +26718,16 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLoginUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23411,12 +26748,15 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutFollowerInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23437,13 +26777,16 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowerInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23464,6 +26807,9 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowerInput = {
@@ -23474,7 +26820,7 @@ export namespace Prisma {
   export type UserCreateWithoutFolloweeInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23495,13 +26841,16 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFolloweeInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23522,6 +26871,9 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFolloweeInput = {
@@ -23543,7 +26895,7 @@ export namespace Prisma {
   export type UserUpdateWithoutFollowerInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23564,13 +26916,16 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowerInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23591,6 +26946,9 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutFolloweeInput = {
@@ -23607,7 +26965,7 @@ export namespace Prisma {
   export type UserUpdateWithoutFolloweeInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23628,13 +26986,16 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFolloweeInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23655,12 +27016,15 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPostInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23681,13 +27045,16 @@ export namespace Prisma {
     Conversation?: ConversationCreateNestedManyWithoutInitiatorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -23708,6 +27075,9 @@ export namespace Prisma {
     Conversation?: ConversationUncheckedCreateNestedManyWithoutInitiatorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostInput = {
@@ -23804,7 +27174,7 @@ export namespace Prisma {
   export type UserUpdateWithoutPostInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23825,13 +27195,16 @@ export namespace Prisma {
     Conversation?: ConversationUpdateManyWithoutInitiatorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23852,6 +27225,9 @@ export namespace Prisma {
     Conversation?: ConversationUncheckedUpdateManyWithoutInitiatorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostMediaUpsertWithWhereUniqueWithoutPostInput = {
@@ -24007,7 +27383,7 @@ export namespace Prisma {
   export type UserCreateWithoutCommentInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -24028,13 +27404,16 @@ export namespace Prisma {
     Conversation?: ConversationCreateNestedManyWithoutInitiatorInput
     Post?: PostCreateNestedManyWithoutAuthorInput
     Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -24055,6 +27434,9 @@ export namespace Prisma {
     Conversation?: ConversationUncheckedCreateNestedManyWithoutInitiatorInput
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentInput = {
@@ -24110,7 +27492,7 @@ export namespace Prisma {
   export type UserUpdateWithoutCommentInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24131,13 +27513,16 @@ export namespace Prisma {
     Conversation?: ConversationUpdateManyWithoutInitiatorNestedInput
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24158,6 +27543,9 @@ export namespace Prisma {
     Conversation?: ConversationUncheckedUpdateManyWithoutInitiatorNestedInput
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostCreateWithoutLikeInput = {
@@ -24191,7 +27579,7 @@ export namespace Prisma {
   export type UserCreateWithoutLikeInput = {
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -24212,13 +27600,16 @@ export namespace Prisma {
     Conversation?: ConversationCreateNestedManyWithoutInitiatorInput
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLikeInput = {
     id?: number
     fullname: string
     username: string
-    email: string
+    email?: string | null
     password: string
     about?: string | null
     bio?: string | null
@@ -24239,6 +27630,9 @@ export namespace Prisma {
     Conversation?: ConversationUncheckedCreateNestedManyWithoutInitiatorInput
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLikeInput = {
@@ -24294,7 +27688,7 @@ export namespace Prisma {
   export type UserUpdateWithoutLikeInput = {
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24315,13 +27709,16 @@ export namespace Prisma {
     Conversation?: ConversationUpdateManyWithoutInitiatorNestedInput
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikeInput = {
     id?: IntFieldUpdateOperationsInput | number
     fullname?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     bio?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24342,6 +27739,411 @@ export namespace Prisma {
     Conversation?: ConversationUncheckedUpdateManyWithoutInitiatorNestedInput
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutCurrentUserInput = {
+    fullname: string
+    username: string
+    email?: string | null
+    password: string
+    about?: string | null
+    bio?: string | null
+    birthdate?: Date | string | null
+    phone?: string | null
+    avatarPath?: string | null
+    uuid?: string
+    isActive?: boolean
+    registeredAt?: Date | string
+    Messages?: MessageCreateNestedManyWithoutUserInput
+    Participant?: ParticipantCreateNestedManyWithoutUserInput
+    friend?: FriendCreateNestedManyWithoutFriendInput
+    loginUser?: FriendCreateNestedManyWithoutLoginUserInput
+    follower?: FollowRequestCreateNestedManyWithoutFollowerInput
+    followee?: FollowRequestCreateNestedManyWithoutFolloweeInput
+    sender?: FriendRequestCreateNestedManyWithoutSenderInput
+    receiver?: FriendRequestCreateNestedManyWithoutReceiverInput
+    Conversation?: ConversationCreateNestedManyWithoutInitiatorInput
+    Post?: PostCreateNestedManyWithoutAuthorInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
+    Like?: LikeCreateNestedManyWithoutUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCurrentUserInput = {
+    id?: number
+    fullname: string
+    username: string
+    email?: string | null
+    password: string
+    about?: string | null
+    bio?: string | null
+    birthdate?: Date | string | null
+    phone?: string | null
+    avatarPath?: string | null
+    uuid?: string
+    isActive?: boolean
+    registeredAt?: Date | string
+    Messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    Participant?: ParticipantUncheckedCreateNestedManyWithoutUserInput
+    friend?: FriendUncheckedCreateNestedManyWithoutFriendInput
+    loginUser?: FriendUncheckedCreateNestedManyWithoutLoginUserInput
+    follower?: FollowRequestUncheckedCreateNestedManyWithoutFollowerInput
+    followee?: FollowRequestUncheckedCreateNestedManyWithoutFolloweeInput
+    sender?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receiver?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
+    Conversation?: ConversationUncheckedCreateNestedManyWithoutInitiatorInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCurrentUserInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCurrentUserInput, UserUncheckedCreateWithoutCurrentUserInput>
+  }
+
+  export type UserCreateWithoutOtherUserInput = {
+    fullname: string
+    username: string
+    email?: string | null
+    password: string
+    about?: string | null
+    bio?: string | null
+    birthdate?: Date | string | null
+    phone?: string | null
+    avatarPath?: string | null
+    uuid?: string
+    isActive?: boolean
+    registeredAt?: Date | string
+    Messages?: MessageCreateNestedManyWithoutUserInput
+    Participant?: ParticipantCreateNestedManyWithoutUserInput
+    friend?: FriendCreateNestedManyWithoutFriendInput
+    loginUser?: FriendCreateNestedManyWithoutLoginUserInput
+    follower?: FollowRequestCreateNestedManyWithoutFollowerInput
+    followee?: FollowRequestCreateNestedManyWithoutFolloweeInput
+    sender?: FriendRequestCreateNestedManyWithoutSenderInput
+    receiver?: FriendRequestCreateNestedManyWithoutReceiverInput
+    Conversation?: ConversationCreateNestedManyWithoutInitiatorInput
+    Post?: PostCreateNestedManyWithoutAuthorInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
+    Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OAuths?: OAuthCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutOtherUserInput = {
+    id?: number
+    fullname: string
+    username: string
+    email?: string | null
+    password: string
+    about?: string | null
+    bio?: string | null
+    birthdate?: Date | string | null
+    phone?: string | null
+    avatarPath?: string | null
+    uuid?: string
+    isActive?: boolean
+    registeredAt?: Date | string
+    Messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    Participant?: ParticipantUncheckedCreateNestedManyWithoutUserInput
+    friend?: FriendUncheckedCreateNestedManyWithoutFriendInput
+    loginUser?: FriendUncheckedCreateNestedManyWithoutLoginUserInput
+    follower?: FollowRequestUncheckedCreateNestedManyWithoutFollowerInput
+    followee?: FollowRequestUncheckedCreateNestedManyWithoutFolloweeInput
+    sender?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receiver?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
+    Conversation?: ConversationUncheckedCreateNestedManyWithoutInitiatorInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OAuths?: OAuthUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutOtherUserInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOtherUserInput, UserUncheckedCreateWithoutOtherUserInput>
+  }
+
+  export type UserUpsertWithoutCurrentUserInput = {
+    update: XOR<UserUpdateWithoutCurrentUserInput, UserUncheckedUpdateWithoutCurrentUserInput>
+    create: XOR<UserCreateWithoutCurrentUserInput, UserUncheckedCreateWithoutCurrentUserInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCurrentUserInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCurrentUserInput, UserUncheckedUpdateWithoutCurrentUserInput>
+  }
+
+  export type UserUpdateWithoutCurrentUserInput = {
+    fullname?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    birthdate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    uuid?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Messages?: MessageUpdateManyWithoutUserNestedInput
+    Participant?: ParticipantUpdateManyWithoutUserNestedInput
+    friend?: FriendUpdateManyWithoutFriendNestedInput
+    loginUser?: FriendUpdateManyWithoutLoginUserNestedInput
+    follower?: FollowRequestUpdateManyWithoutFollowerNestedInput
+    followee?: FollowRequestUpdateManyWithoutFolloweeNestedInput
+    sender?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receiver?: FriendRequestUpdateManyWithoutReceiverNestedInput
+    Conversation?: ConversationUpdateManyWithoutInitiatorNestedInput
+    Post?: PostUpdateManyWithoutAuthorNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
+    Like?: LikeUpdateManyWithoutUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCurrentUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    fullname?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    birthdate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    uuid?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    Participant?: ParticipantUncheckedUpdateManyWithoutUserNestedInput
+    friend?: FriendUncheckedUpdateManyWithoutFriendNestedInput
+    loginUser?: FriendUncheckedUpdateManyWithoutLoginUserNestedInput
+    follower?: FollowRequestUncheckedUpdateManyWithoutFollowerNestedInput
+    followee?: FollowRequestUncheckedUpdateManyWithoutFolloweeNestedInput
+    sender?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receiver?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    Conversation?: ConversationUncheckedUpdateManyWithoutInitiatorNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUpsertWithoutOtherUserInput = {
+    update: XOR<UserUpdateWithoutOtherUserInput, UserUncheckedUpdateWithoutOtherUserInput>
+    create: XOR<UserCreateWithoutOtherUserInput, UserUncheckedCreateWithoutOtherUserInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOtherUserInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOtherUserInput, UserUncheckedUpdateWithoutOtherUserInput>
+  }
+
+  export type UserUpdateWithoutOtherUserInput = {
+    fullname?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    birthdate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    uuid?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Messages?: MessageUpdateManyWithoutUserNestedInput
+    Participant?: ParticipantUpdateManyWithoutUserNestedInput
+    friend?: FriendUpdateManyWithoutFriendNestedInput
+    loginUser?: FriendUpdateManyWithoutLoginUserNestedInput
+    follower?: FollowRequestUpdateManyWithoutFollowerNestedInput
+    followee?: FollowRequestUpdateManyWithoutFolloweeNestedInput
+    sender?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receiver?: FriendRequestUpdateManyWithoutReceiverNestedInput
+    Conversation?: ConversationUpdateManyWithoutInitiatorNestedInput
+    Post?: PostUpdateManyWithoutAuthorNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
+    Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OAuths?: OAuthUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOtherUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    fullname?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    birthdate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    uuid?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    Participant?: ParticipantUncheckedUpdateManyWithoutUserNestedInput
+    friend?: FriendUncheckedUpdateManyWithoutFriendNestedInput
+    loginUser?: FriendUncheckedUpdateManyWithoutLoginUserNestedInput
+    follower?: FollowRequestUncheckedUpdateManyWithoutFollowerNestedInput
+    followee?: FollowRequestUncheckedUpdateManyWithoutFolloweeNestedInput
+    sender?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receiver?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    Conversation?: ConversationUncheckedUpdateManyWithoutInitiatorNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OAuths?: OAuthUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutOAuthsInput = {
+    fullname: string
+    username: string
+    email?: string | null
+    password: string
+    about?: string | null
+    bio?: string | null
+    birthdate?: Date | string | null
+    phone?: string | null
+    avatarPath?: string | null
+    uuid?: string
+    isActive?: boolean
+    registeredAt?: Date | string
+    Messages?: MessageCreateNestedManyWithoutUserInput
+    Participant?: ParticipantCreateNestedManyWithoutUserInput
+    friend?: FriendCreateNestedManyWithoutFriendInput
+    loginUser?: FriendCreateNestedManyWithoutLoginUserInput
+    follower?: FollowRequestCreateNestedManyWithoutFollowerInput
+    followee?: FollowRequestCreateNestedManyWithoutFolloweeInput
+    sender?: FriendRequestCreateNestedManyWithoutSenderInput
+    receiver?: FriendRequestCreateNestedManyWithoutReceiverInput
+    Conversation?: ConversationCreateNestedManyWithoutInitiatorInput
+    Post?: PostCreateNestedManyWithoutAuthorInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
+    Like?: LikeCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationCreateNestedManyWithoutOtherUserInput
+  }
+
+  export type UserUncheckedCreateWithoutOAuthsInput = {
+    id?: number
+    fullname: string
+    username: string
+    email?: string | null
+    password: string
+    about?: string | null
+    bio?: string | null
+    birthdate?: Date | string | null
+    phone?: string | null
+    avatarPath?: string | null
+    uuid?: string
+    isActive?: boolean
+    registeredAt?: Date | string
+    Messages?: MessageUncheckedCreateNestedManyWithoutUserInput
+    Participant?: ParticipantUncheckedCreateNestedManyWithoutUserInput
+    friend?: FriendUncheckedCreateNestedManyWithoutFriendInput
+    loginUser?: FriendUncheckedCreateNestedManyWithoutLoginUserInput
+    follower?: FollowRequestUncheckedCreateNestedManyWithoutFollowerInput
+    followee?: FollowRequestUncheckedCreateNestedManyWithoutFolloweeInput
+    sender?: FriendRequestUncheckedCreateNestedManyWithoutSenderInput
+    receiver?: FriendRequestUncheckedCreateNestedManyWithoutReceiverInput
+    Conversation?: ConversationUncheckedCreateNestedManyWithoutInitiatorInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    Like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    CurrentUser?: NotificationUncheckedCreateNestedManyWithoutCurrentUserInput
+    OtherUser?: NotificationUncheckedCreateNestedManyWithoutOtherUserInput
+  }
+
+  export type UserCreateOrConnectWithoutOAuthsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOAuthsInput, UserUncheckedCreateWithoutOAuthsInput>
+  }
+
+  export type UserUpsertWithoutOAuthsInput = {
+    update: XOR<UserUpdateWithoutOAuthsInput, UserUncheckedUpdateWithoutOAuthsInput>
+    create: XOR<UserCreateWithoutOAuthsInput, UserUncheckedCreateWithoutOAuthsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOAuthsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOAuthsInput, UserUncheckedUpdateWithoutOAuthsInput>
+  }
+
+  export type UserUpdateWithoutOAuthsInput = {
+    fullname?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    birthdate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    uuid?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Messages?: MessageUpdateManyWithoutUserNestedInput
+    Participant?: ParticipantUpdateManyWithoutUserNestedInput
+    friend?: FriendUpdateManyWithoutFriendNestedInput
+    loginUser?: FriendUpdateManyWithoutLoginUserNestedInput
+    follower?: FollowRequestUpdateManyWithoutFollowerNestedInput
+    followee?: FollowRequestUpdateManyWithoutFolloweeNestedInput
+    sender?: FriendRequestUpdateManyWithoutSenderNestedInput
+    receiver?: FriendRequestUpdateManyWithoutReceiverNestedInput
+    Conversation?: ConversationUpdateManyWithoutInitiatorNestedInput
+    Post?: PostUpdateManyWithoutAuthorNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
+    Like?: LikeUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUpdateManyWithoutOtherUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOAuthsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    fullname?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    about?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    birthdate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarPath?: NullableStringFieldUpdateOperationsInput | string | null
+    uuid?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Messages?: MessageUncheckedUpdateManyWithoutUserNestedInput
+    Participant?: ParticipantUncheckedUpdateManyWithoutUserNestedInput
+    friend?: FriendUncheckedUpdateManyWithoutFriendNestedInput
+    loginUser?: FriendUncheckedUpdateManyWithoutLoginUserNestedInput
+    follower?: FollowRequestUncheckedUpdateManyWithoutFollowerNestedInput
+    followee?: FollowRequestUncheckedUpdateManyWithoutFolloweeNestedInput
+    sender?: FriendRequestUncheckedUpdateManyWithoutSenderNestedInput
+    receiver?: FriendRequestUncheckedUpdateManyWithoutReceiverNestedInput
+    Conversation?: ConversationUncheckedUpdateManyWithoutInitiatorNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    Like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    CurrentUser?: NotificationUncheckedUpdateManyWithoutCurrentUserNestedInput
+    OtherUser?: NotificationUncheckedUpdateManyWithoutOtherUserNestedInput
   }
 
   export type MessageCreateManyUserInput = {
@@ -24441,6 +28243,29 @@ export namespace Prisma {
     postId: number
     isActive?: boolean
     createdAt?: Date | string
+  }
+
+  export type NotificationCreateManyCurrentUserInput = {
+    id?: number
+    otherUserId: number
+    type: $Enums.notificationType
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type NotificationCreateManyOtherUserInput = {
+    id?: number
+    currentUserId: number
+    type: $Enums.notificationType
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type OAuthCreateManyUserInput = {
+    profileId?: number
+    provider: string
+    createdAt?: Date | string
+    isActive?: boolean
   }
 
   export type MessageUpdateWithoutUserInput = {
@@ -24738,6 +28563,72 @@ export namespace Prisma {
     postId?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUpdateWithoutCurrentUserInput = {
+    type?: EnumnotificationTypeFieldUpdateOperationsInput | $Enums.notificationType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OtherUser?: UserUpdateOneRequiredWithoutOtherUserNestedInput
+  }
+
+  export type NotificationUncheckedUpdateWithoutCurrentUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    otherUserId?: IntFieldUpdateOperationsInput | number
+    type?: EnumnotificationTypeFieldUpdateOperationsInput | $Enums.notificationType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutCurrentUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    otherUserId?: IntFieldUpdateOperationsInput | number
+    type?: EnumnotificationTypeFieldUpdateOperationsInput | $Enums.notificationType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUpdateWithoutOtherUserInput = {
+    type?: EnumnotificationTypeFieldUpdateOperationsInput | $Enums.notificationType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    CurrentUser?: UserUpdateOneRequiredWithoutCurrentUserNestedInput
+  }
+
+  export type NotificationUncheckedUpdateWithoutOtherUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    currentUserId?: IntFieldUpdateOperationsInput | number
+    type?: EnumnotificationTypeFieldUpdateOperationsInput | $Enums.notificationType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutOtherUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    currentUserId?: IntFieldUpdateOperationsInput | number
+    type?: EnumnotificationTypeFieldUpdateOperationsInput | $Enums.notificationType
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OAuthUpdateWithoutUserInput = {
+    provider?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type OAuthUncheckedUpdateWithoutUserInput = {
+    profileId?: IntFieldUpdateOperationsInput | number
+    provider?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type OAuthUncheckedUpdateManyWithoutUserInput = {
+    profileId?: IntFieldUpdateOperationsInput | number
+    provider?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MessageCreateManyConversationInput = {

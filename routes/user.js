@@ -7,7 +7,7 @@ const multer = require("multer");
 
 const router = Router();
 
-router.use(passport.authenticate("jwt", { session: false }));
+router.use(passport.authenticate(["jwt"], { session: false }));
 
 const sendValidationResults = (req, res, next) => {
   const validations = validationResult(req);
@@ -27,11 +27,15 @@ router.use(
 
 router.get("/:id", userController.getUser);
 
+router.get("{username}", userController.getUserByUsername);
+
 router.patch("/:id", userController.updateUser);
 
 router.delete("/:id", userController.deleteUser);
 
 router.get("{search}", userController.searchUsers);
+
+router.get("{top_users}", userController.getUsersByHighestFollowers);
 
 router.get("{conversation_id&auth_id}", userController.getChatUser);
 

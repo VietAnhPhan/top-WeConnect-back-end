@@ -19,7 +19,7 @@ async function createLike(req, res, next) {
   try {
     const like = {
       postId: Number(req.body.postId),
-      audienceId: Number(req.body.audienceId),
+      audienceId: req.user.id,
     };
 
     const oldLike = await prisma.like.findFirst({
@@ -30,15 +30,7 @@ async function createLike(req, res, next) {
     });
 
     if (oldLike) {
-      const Like = await prisma.like.update({
-        where: {
-          id: oldLike.id,
-        },
-        data: {
-          isActive: true,
-        },
-      });
-      return res.json(Like);
+      return res.json(oldLike);
     }
 
     const Like = await prisma.like.create({

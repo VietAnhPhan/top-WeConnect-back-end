@@ -1,12 +1,11 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const { PrismaClient } = require("../generated/prisma");
 const bcrypt = require("bcryptjs");
-const prisma = new PrismaClient();
-
 const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const extractJWT = passportJWT.ExtractJwt;
+const GitHubStrategy = require("passport-github2").Strategy;
+const { prisma } = require("./helpers");
 
 passport.use(
   new LocalStrategy(
@@ -65,7 +64,7 @@ passport.use(
       try {
         const user = await prisma.user.findFirst({
           where: {
-            id: jwtPayload.id,
+            uuid: jwtPayload.uuid,
           },
         });
 
@@ -76,6 +75,48 @@ passport.use(
         }
       } catch (error) {
         return done(error, false);
+      }
+    }
+  )
+);
+
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: `http://localhost:${process.env.APP_PORT}/api/auth/github/callback`,
+    },
+    async function (accessToken, refreshToken, profile, done) {
+      console.log(profile);
+      // User.findOrCreate({ githubId: profile.id }, function (err, user) {
+      // return done(err, user);
+      // });
+      try {
+        const User = await prisma.oAuth.findFirst({
+          where: {
+            profileId: profile._json.id,
+          },
+        });
+
+        if (!User) {
+          const User = await prisma.user.create({
+            data: {
+              fullname: profile._json.name,
+              username: profile.username,
+              about: profile.bio,
+              avatarPath: profile._json.avatar_url,
+              email: profile._json.email,
+              password: await bcrypt.hash(profile.username, 10),
+            },
+          });
+
+          return done(null, User);
+        }
+
+        return done(null, User);
+      } catch (err) {
+        return done(err);
       }
     }
   )

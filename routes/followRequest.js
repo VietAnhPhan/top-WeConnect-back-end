@@ -19,8 +19,8 @@ const sendValidationResults = (req, res, next) => {
 };
 
 router.use(
-  "/:id",
-  param("id").isNumeric().withMessage("Comment Id should be a number"),
+  "/users/:id",
+  param("id").isNumeric().withMessage("Follow Request Id should be a number"),
   sendValidationResults
 );
 router.post("/", followRequestController.createFollowRequest);
@@ -28,12 +28,12 @@ router.post("/", followRequestController.createFollowRequest);
 router.delete("/:id", followRequestController.deleteFollowRequest);
 
 router.get(
-  "/users/:id{followers=true}",
-  followRequestController.getFollowersByUserId
+  "{followers=true}",
+  followRequestController.getFollowersByUserid
 );
 
 router.get(
-  "/users/:id{following=true}",
+  "{followings=true}",
   followRequestController.getFollowingsByUserId
 );
 

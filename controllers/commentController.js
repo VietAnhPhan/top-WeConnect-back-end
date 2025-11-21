@@ -29,12 +29,15 @@ async function createComment(req, res, next) {
   try {
     const post = {
       comment: req.body.comment,
-      authorId: Number(req.body.authorId),
-      audienceId: Number(req.body.audienceId),
+      audienceId: req.user.id,
+      postId: Number(req.body.postId),
     };
 
-    const Post = await prisma.post.create({
+    const Post = await prisma.comment.create({
       data: post,
+      include: {
+        User: true,
+      },
     });
 
     return res.json(Post);

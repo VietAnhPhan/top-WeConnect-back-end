@@ -1,45 +1,45 @@
 const { prisma } = require("../config/helpers");
 
-async function getFollowersByUserId(req, res, next) {
-  const isFollowers = req.query.followers;
+async function getFollowersByUserid(req, res, next) {
+  const isFollower = req.query.followers;
 
-  if (!isFollowers) {
-    next();
+  if (!isFollower) {
+    return next();
   }
 
-  const userId = Number(req.params.id);
-  const Followers = await prisma.followRequest.findMany({
+  const followeeId = req.user.id;
+  const followers = await prisma.followRequest.findMany({
     where: {
       isActive: true,
-      followeeId: userId,
+      followeeId: followeeId,
     },
-    select: {
-      follower: true,
-    },
+    include:{
+      follower:true
+    }
   });
 
-  return res.json(Followers);
+  return res.json(followers);
 }
 
-async function getFollowingsByUserId(req, res) {
-  const isFollowing = req.query.following;
+async function getFollowingsByUserId(req, res, next) {
+  const isFollowing = req.query.followings;
 
   if (!isFollowing) {
-    res.json();
+    return next();
   }
-  
-  const userId = Number(req.params.id);
-  const Following = await prisma.followRequest.findMany({
+
+  const userId = req.user.id;
+  const Followings = await prisma.followRequest.findMany({
     where: {
       isActive: true,
       followerId: userId,
     },
-    select: {
+    include: {
       followee: true,
     },
   });
 
-  return res.json(Following);
+  return res.json(Followings);
 }
 
 async function createFollowRequest(req, res, next) {
@@ -57,15 +57,7 @@ async function createFollowRequest(req, res, next) {
     });
 
     if (oldFollowRequest) {
-      const followRequest = await prisma.followRequest.update({
-        where: {
-          id: oldFollowRequest.id,
-        },
-        data: {
-          isActive: true,
-        },
-      });
-      return res.json(followRequest);
+      return res.json(oldFollowRequest);
     }
 
     const FollowRequest = await prisma.followRequest.create({
@@ -99,7 +91,7 @@ async function deleteFollowRequest(req, res, next) {
 }
 
 module.exports = {
-  getFollowersByUserId,
+  getFollowersByUserid,
   getFollowingsByUserId,
   createFollowRequest,
   deleteFollowRequest,

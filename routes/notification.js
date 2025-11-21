@@ -2,7 +2,7 @@ const { Router } = require("express");
 const { param, validationResult } = require("express-validator");
 const passport = require("passport");
 
-const likeController = require("../controllers/likeController");
+const notificationController = require("../controllers/notificationController");
 
 const router = Router();
 
@@ -18,15 +18,8 @@ const sendValidationResults = (req, res, next) => {
   next();
 };
 
-router.get("/posts/:id", likeController.getLikesByPostId);
+router.post("/", notificationController.createNotification);
 
-router.use(
-  "/:id",
-  param("id").isNumeric().withMessage("Like Id should be a number"),
-  sendValidationResults
-);
-router.post("/", likeController.createLike);
-
-router.delete("/:id", likeController.deleteLike);
+router.get("/", notificationController.getNotifications);
 
 module.exports = router;

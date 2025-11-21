@@ -23,6 +23,11 @@ async function getPosts(req, res) {
           avatarPath: true,
         },
       },
+      Comment: {
+        include: {
+          User: true,
+        },
+      },
       _count: {
         select: {
           Like: true,
@@ -38,15 +43,104 @@ async function getPosts(req, res) {
   return res.json(posts);
 }
 
+async function getPostsByUsername(req, res) {
+  const username = req.params.username;
+
+  if (!username) {
+    return res.json([]);
+  }
+
+  const posts = await prisma.post.findMany({
+    where: {
+      isActive: true,
+      author: {
+        username: username,
+      },
+    },
+    include: {
+      author: {
+        select: {
+          username: true,
+          fullname: true,
+          avatarPath: true,
+        },
+      },
+      Comment: {
+        include: {
+          User: true,
+        },
+      },
+      _count: {
+        select: {
+          Like: true,
+          Comment: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return res.json(posts);
+}
+
+async function getTrendingPosts(req, res, next) {
+  if (req.query.trending && req.query.trending == "true") {
+    const posts = await prisma.post.findMany({
+      where: {
+        isActive: true,
+      },
+      include: {
+        author: {
+          select: {
+            username: true,
+            fullname: true,
+            avatarPath: true,
+          },
+        },
+        Comment: {
+          include: {
+            User: true,
+          },
+        },
+        _count: {
+          select: {
+            Like: true,
+            Comment: true,
+          },
+        },
+      },
+      orderBy: {
+        Like: {
+          _count: "desc",
+        },
+      },
+    });
+
+    return res.json(posts);
+  }
+  next();
+}
+
 async function createPost(req, res, next) {
   try {
     const post = {
       body: req.body.body,
-      authorId: Number(req.body.authorId),
+      authorId: req.user.id,
     };
 
     const Post = await prisma.post.create({
       data: post,
+      include: {
+        author: true,
+        _count: {
+          select: {
+            Like: true,
+            Comment: true,
+          },
+        },
+      },
     });
 
     return res.json(Post);
@@ -111,6 +205,7 @@ async function searchPosts(req, res, next) {
           select: {
             fullname: true,
             username: true,
+            avatarPath: true,
           },
         },
         _count: {
@@ -133,4 +228,6 @@ module.exports = {
   updatePost,
   deletePost,
   searchPosts,
+  getTrendingPosts,
+  getPostsByUsername,
 };

@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const { prisma } = require("../config/helpers");
 const jwt = require("jsonwebtoken");
+const { generateUsername } = require("unique-username-generator");
 
 async function getUser(req, res) {
   const user = await prisma.user.findFirst({
@@ -12,12 +13,22 @@ async function getUser(req, res) {
   return res.json(user);
 }
 
+async function getUserByUsername(req, res, next) {
+  if (!req.query.username) {
+    return next();
+  }
+
+  const user = await prisma.user.findFirst({
+    where: {
+      username: req.query.username,
+    },
+  });
+
+  return res.json(user);
+}
+
 async function searchUsers(req, res, next) {
-  if (
-   
-    req.query.search &&
-    req.query.search != ""
-  ) {
+  if (req.query.search && req.query.search !== "") {
     const User = await prisma.user.findMany({
       where: {
         OR: [
@@ -46,14 +57,14 @@ async function searchUsers(req, res, next) {
   //   });
   //   return res.json(User);
   // }
-  next();
+  return next();
 }
 
 async function getChatUser(req, res, next) {
   let conversationId = req.query.conversation_id;
   let userId = req.query.auth_id;
   if (!conversationId || conversationId === "" || !userId || userId === "") {
-    next();
+    return next();
   } else {
     const conversation = await prisma.conversation.findFirst({
       where: {
@@ -91,16 +102,40 @@ async function getUsers(req, res) {
   return res.json(users);
 }
 
+async function getUsersByHighestFollowers(req, res, next) {
+  if (!req.query.top_users) {
+    return next();
+  }
+
+  const users = await prisma.user.findMany({
+    where: {
+      isActive: true,
+      NOT: {
+        id: req.user.id,
+      },
+    },
+    include: {
+      followee: true,
+    },
+    orderBy: {
+      follower: {
+        _count: "desc",
+      },
+    },
+  });
+
+  return res.json(users);
+}
+
 async function createUser(req, res, next) {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     const user = {
-      name: req.body.name,
+      fullname: req.body.name,
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
-      isAdmin: req.body.isAdmin ? true : false,
     };
 
     const User = await prisma.user.create({
@@ -112,8 +147,33 @@ async function createUser(req, res, next) {
       password: req.body.password,
     };
 
-    const token = jwt.sign(userAuth, "jwt_secret");
+    const token = jwt.sign(userAuth, process.env.SECRET_KEY);
     return res.json({ username: User.username, token });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function createGuest(req, res, next) {
+  try {
+    const username = generateUsername("", 3);
+    const password = username;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const fullname = username;
+
+    const user = {
+      username,
+      fullname,
+      password: hashedPassword,
+    };
+
+    await prisma.user.create({
+      data: user,
+    });
+
+    const token = jwt.sign({ username, password }, process.env.SECRET_KEY);
+
+    return res.json({ username, token });
   } catch (err) {
     next(err);
   }
@@ -200,4 +260,7 @@ module.exports = {
   deleteUser,
   resetPassword,
   getChatUser,
+  getUsersByHighestFollowers,
+  getUserByUsername,
+  createGuest,
 };

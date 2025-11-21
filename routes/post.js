@@ -6,7 +6,7 @@ const postController = require("../controllers/postController");
 
 const router = Router();
 
-router.use(passport.authenticate("jwt", { session: false }));
+router.use(passport.authenticate(["jwt"], { session: false }));
 
 const sendValidationResults = (req, res, next) => {
   const validations = validationResult(req);
@@ -18,6 +18,8 @@ const sendValidationResults = (req, res, next) => {
   next();
 };
 
+router.get("/users/:username", postController.getPostsByUsername);
+
 router.use(
   "/:id",
   param("id").isNumeric().withMessage("Post Id should be a number"),
@@ -27,6 +29,8 @@ router.use(
 router.get("/:id", postController.getPost);
 
 router.get("{search}", postController.searchPosts);
+
+router.get("{trending}", postController.getTrendingPosts);
 
 router.post("/", postController.createPost);
 

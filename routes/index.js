@@ -9,6 +9,8 @@ const post = require("./post");
 const like = require("./like");
 const comment = require("./comment");
 const followRequest = require("./followRequest");
+const notification = require("./notification");
+
 
 module.exports = {
   session,
@@ -22,4 +24,5 @@ module.exports = {
   like,
   comment,
   followRequest,
+  notification
 };

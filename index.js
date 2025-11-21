@@ -50,7 +50,7 @@ app.use(
   })
 );
 
-app.use("/session", routes.session);
+app.use("/sessions", routes.session);
 app.use("/api/users", routes.user);
 app.use("/api/posts", routes.post);
 app.use("/api/auth", authRoutes);
@@ -61,7 +61,8 @@ app.use("/api/friendrequests", routes.friendRequest);
 app.use("/api/friends", routes.friend);
 app.use("/api/comments", routes.comment);
 app.use("/api/likes", routes.like);
-app.use("/api/followRequest", routes.followRequest);
+app.use("/api/followRequests", routes.followRequest);
+app.use("/api/notifications", routes.notification);
 
 app.use((err, req, res, next) => {
   console.log(err);

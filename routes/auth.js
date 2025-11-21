@@ -121,4 +121,16 @@ router.put(
   userController.resetPassword
 );
 
+router.post("/guests", userController.createGuest);
+
+router.get('/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }));
+
+router.get('/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 module.exports = router;

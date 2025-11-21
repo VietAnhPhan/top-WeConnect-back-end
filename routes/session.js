@@ -1,9 +1,11 @@
 const { Router } = require("express");
+const { prisma } = require("../config/helpers");
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  return res.send(req.context.models.users[req.context.me.id]);
+router.get("/", async (req, res) => {
+  const sessions = await prisma.session.findMany();
+  return res.json(sessions);
 });
 
 module.exports = router;
