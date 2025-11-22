@@ -30,7 +30,7 @@ async function createLike(req, res, next) {
     });
 
     if (oldLike) {
-      return res.json(oldLike);
+      return res.json(null);
     }
 
     const Like = await prisma.like.create({
