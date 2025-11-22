@@ -23,6 +23,11 @@ async function getPosts(req, res) {
           avatarPath: true,
         },
       },
+      Like: {
+        include: {
+          User: true,
+        },
+      },
       Comment: {
         include: {
           User: true,
