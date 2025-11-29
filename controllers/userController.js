@@ -184,6 +184,7 @@ async function createGuest(req, res, next) {
 
 async function updateUser(req, res, next) {
   try {
+    
     req.params.id = parseInt(req.params.id);
 
     let user = {};
@@ -191,7 +192,7 @@ async function updateUser(req, res, next) {
       if (key === "password" && value !== "") {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         user.password = hashedPassword;
-      } else if (value === "") {
+      } else if (value === "" || !value) {
         continue;
       } else {
         user[key] = value;
