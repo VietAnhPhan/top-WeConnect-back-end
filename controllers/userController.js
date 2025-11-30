@@ -40,14 +40,18 @@ async function searchUsers(req, res, next) {
           },
           {
             fullname: {
-              contains: req.query.search.toLowerCase(),
+              contains: req.query.search,
               mode: "insensitive",
             },
           },
         ],
         isActive: true,
       },
+      include: {
+        followee: true,
+      },
     });
+
     return res.json(User);
   }
 
@@ -184,7 +188,6 @@ async function createGuest(req, res, next) {
 
 async function updateUser(req, res, next) {
   try {
-    
     req.params.id = parseInt(req.params.id);
 
     let user = {};
