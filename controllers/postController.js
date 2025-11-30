@@ -213,6 +213,11 @@ async function searchPosts(req, res, next) {
             avatarPath: true,
           },
         },
+        Comment: {
+          include: {
+            User: true,
+          },
+        },
         _count: {
           select: {
             Like: true,
