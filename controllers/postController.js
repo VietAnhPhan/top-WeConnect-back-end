@@ -39,6 +39,7 @@ async function getPosts(req, res) {
           Comment: true,
         },
       },
+      PostMedia: true,
     },
     // orderBy: {
     //   created_at: "desc",
@@ -81,6 +82,7 @@ async function getPostsByUsername(req, res) {
           Comment: true,
         },
       },
+      PostMedia: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -130,6 +132,8 @@ async function getTrendingPosts(req, res, next) {
 
 async function createPost(req, res, next) {
   try {
+    // if (!req.body.body.trim()) return res.json(null);
+
     const post = {
       body: req.body.body,
       authorId: req.user.id,
