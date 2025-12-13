@@ -10,6 +10,8 @@ const like = require("./like");
 const comment = require("./comment");
 const followRequest = require("./followRequest");
 const notification = require("./notification");
+const postMedia = require("./postMedia");
+
 
 
 module.exports = {
@@ -24,5 +26,6 @@ module.exports = {
   like,
   comment,
   followRequest,
-  notification
+  notification,
+  postMedia
 };

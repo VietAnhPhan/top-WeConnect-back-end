@@ -23,6 +23,11 @@ async function getPosts(req, res) {
           avatarPath: true,
         },
       },
+      Like: {
+        include: {
+          User: true,
+        },
+      },
       Comment: {
         include: {
           User: true,
@@ -34,6 +39,7 @@ async function getPosts(req, res) {
           Comment: true,
         },
       },
+      PostMedia: true,
     },
     // orderBy: {
     //   created_at: "desc",
@@ -76,6 +82,7 @@ async function getPostsByUsername(req, res) {
           Comment: true,
         },
       },
+      PostMedia: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -125,6 +132,8 @@ async function getTrendingPosts(req, res, next) {
 
 async function createPost(req, res, next) {
   try {
+    // if (!req.body.body.trim()) return res.json(null);
+
     const post = {
       body: req.body.body,
       authorId: req.user.id,
@@ -206,6 +215,11 @@ async function searchPosts(req, res, next) {
             fullname: true,
             username: true,
             avatarPath: true,
+          },
+        },
+        Comment: {
+          include: {
+            User: true,
           },
         },
         _count: {

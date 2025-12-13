@@ -31,20 +31,27 @@ async function searchUsers(req, res, next) {
   if (req.query.search && req.query.search !== "") {
     const User = await prisma.user.findMany({
       where: {
+        NOT: {
+          username: req.user.username,
+        },
         OR: [
           {
             username: { contains: req.query.search, mode: "insensitive" },
           },
           {
             fullname: {
-              contains: req.query.search.toLowerCase(),
+              contains: req.query.search,
               mode: "insensitive",
             },
           },
         ],
         isActive: true,
       },
+      include: {
+        followee: true,
+      },
     });
+
     return res.json(User);
   }
 
@@ -188,7 +195,7 @@ async function updateUser(req, res, next) {
       if (key === "password" && value !== "") {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         user.password = hashedPassword;
-      } else if (value === "") {
+      } else if (value === "" || !value) {
         continue;
       } else {
         user[key] = value;

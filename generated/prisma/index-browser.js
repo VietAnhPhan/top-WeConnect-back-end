@@ -296,6 +296,11 @@ exports.FriendStatus = exports.$Enums.FriendStatus = {
   stranger: 'stranger'
 };
 
+exports.FollowStatus = exports.$Enums.FollowStatus = {
+  following: 'following',
+  unfollow: 'unfollow'
+};
+
 exports.notificationType = exports.$Enums.notificationType = {
   follow: 'follow',
   comment: 'comment',

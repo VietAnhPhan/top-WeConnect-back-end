@@ -1,21 +1,24 @@
 const { prisma } = require("../config/helpers");
 
 async function getNotifications(req, res) {
-  const comment = await prisma.notification.findMany({
+  const Notifications = await prisma.notification.findMany({
     where: {
       currentUserId: req.user.id,
       isActive: true,
     },
+    include: {
+      OtherUser: true,
+    },
   });
 
-  return res.json(comment);
+  return res.json(Notifications);
 }
 
 async function createNotification(req, res, next) {
   try {
     const notification = {
       currentUserId: Number(req.body.currentUserId),
-      otherUserId: Number(req.body.otherUserId),
+      otherUserId: req.user.id,
       type: req.body.type,
     };
 

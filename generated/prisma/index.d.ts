@@ -11926,7 +11926,7 @@ export namespace Prisma {
     id: number | null
     followerId: number | null
     followeeId: number | null
-    status: $Enums.FriendStatus | null
+    status: $Enums.FollowStatus | null
     isActive: boolean | null
     createdAt: Date | null
   }
@@ -11935,7 +11935,7 @@ export namespace Prisma {
     id: number | null
     followerId: number | null
     followeeId: number | null
-    status: $Enums.FriendStatus | null
+    status: $Enums.FollowStatus | null
     isActive: boolean | null
     createdAt: Date | null
   }
@@ -12081,7 +12081,7 @@ export namespace Prisma {
     id: number
     followerId: number
     followeeId: number
-    status: $Enums.FriendStatus
+    status: $Enums.FollowStatus
     isActive: boolean
     createdAt: Date
     _count: FollowRequestCountAggregateOutputType | null
@@ -12171,7 +12171,7 @@ export namespace Prisma {
       id: number
       followerId: number
       followeeId: number
-      status: $Enums.FriendStatus
+      status: $Enums.FollowStatus
       isActive: boolean
       createdAt: Date
     }, ExtArgs["result"]["followRequest"]>
@@ -12602,7 +12602,7 @@ export namespace Prisma {
     readonly id: FieldRef<"FollowRequest", 'Int'>
     readonly followerId: FieldRef<"FollowRequest", 'Int'>
     readonly followeeId: FieldRef<"FollowRequest", 'Int'>
-    readonly status: FieldRef<"FollowRequest", 'FriendStatus'>
+    readonly status: FieldRef<"FollowRequest", 'FollowStatus'>
     readonly isActive: FieldRef<"FollowRequest", 'Boolean'>
     readonly createdAt: FieldRef<"FollowRequest", 'DateTime'>
   }
@@ -20117,6 +20117,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'FollowStatus'
+   */
+  export type EnumFollowStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FollowStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'FollowStatus[]'
+   */
+  export type ListEnumFollowStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FollowStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'notificationType'
    */
   export type EnumnotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'notificationType'>
@@ -20746,7 +20760,7 @@ export namespace Prisma {
     id?: IntFilter<"FollowRequest"> | number
     followerId?: IntFilter<"FollowRequest"> | number
     followeeId?: IntFilter<"FollowRequest"> | number
-    status?: EnumFriendStatusFilter<"FollowRequest"> | $Enums.FriendStatus
+    status?: EnumFollowStatusFilter<"FollowRequest"> | $Enums.FollowStatus
     isActive?: BoolFilter<"FollowRequest"> | boolean
     createdAt?: DateTimeFilter<"FollowRequest"> | Date | string
     follower?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -20772,7 +20786,7 @@ export namespace Prisma {
     NOT?: FollowRequestWhereInput | FollowRequestWhereInput[]
     followerId?: IntFilter<"FollowRequest"> | number
     followeeId?: IntFilter<"FollowRequest"> | number
-    status?: EnumFriendStatusFilter<"FollowRequest"> | $Enums.FriendStatus
+    status?: EnumFollowStatusFilter<"FollowRequest"> | $Enums.FollowStatus
     isActive?: BoolFilter<"FollowRequest"> | boolean
     createdAt?: DateTimeFilter<"FollowRequest"> | Date | string
     follower?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -20800,7 +20814,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"FollowRequest"> | number
     followerId?: IntWithAggregatesFilter<"FollowRequest"> | number
     followeeId?: IntWithAggregatesFilter<"FollowRequest"> | number
-    status?: EnumFriendStatusWithAggregatesFilter<"FollowRequest"> | $Enums.FriendStatus
+    status?: EnumFollowStatusWithAggregatesFilter<"FollowRequest"> | $Enums.FollowStatus
     isActive?: BoolWithAggregatesFilter<"FollowRequest"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"FollowRequest"> | Date | string
   }
@@ -21790,7 +21804,7 @@ export namespace Prisma {
   }
 
   export type FollowRequestCreateInput = {
-    status?: $Enums.FriendStatus
+    status?: $Enums.FollowStatus
     isActive?: boolean
     createdAt?: Date | string
     follower: UserCreateNestedOneWithoutFollowerInput
@@ -21801,13 +21815,13 @@ export namespace Prisma {
     id?: number
     followerId: number
     followeeId: number
-    status?: $Enums.FriendStatus
+    status?: $Enums.FollowStatus
     isActive?: boolean
     createdAt?: Date | string
   }
 
   export type FollowRequestUpdateInput = {
-    status?: EnumFriendStatusFieldUpdateOperationsInput | $Enums.FriendStatus
+    status?: EnumFollowStatusFieldUpdateOperationsInput | $Enums.FollowStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     follower?: UserUpdateOneRequiredWithoutFollowerNestedInput
@@ -21818,7 +21832,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     followerId?: IntFieldUpdateOperationsInput | number
     followeeId?: IntFieldUpdateOperationsInput | number
-    status?: EnumFriendStatusFieldUpdateOperationsInput | $Enums.FriendStatus
+    status?: EnumFollowStatusFieldUpdateOperationsInput | $Enums.FollowStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21827,13 +21841,13 @@ export namespace Prisma {
     id?: number
     followerId: number
     followeeId: number
-    status?: $Enums.FriendStatus
+    status?: $Enums.FollowStatus
     isActive?: boolean
     createdAt?: Date | string
   }
 
   export type FollowRequestUpdateManyMutationInput = {
-    status?: EnumFriendStatusFieldUpdateOperationsInput | $Enums.FriendStatus
+    status?: EnumFollowStatusFieldUpdateOperationsInput | $Enums.FollowStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21842,7 +21856,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     followerId?: IntFieldUpdateOperationsInput | number
     followeeId?: IntFieldUpdateOperationsInput | number
-    status?: EnumFriendStatusFieldUpdateOperationsInput | $Enums.FriendStatus
+    status?: EnumFollowStatusFieldUpdateOperationsInput | $Enums.FollowStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22925,6 +22939,13 @@ export namespace Prisma {
     _max?: NestedEnumFriendStatusFilter<$PrismaModel>
   }
 
+  export type EnumFollowStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FollowStatus | EnumFollowStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FollowStatus[] | ListEnumFollowStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FollowStatus[] | ListEnumFollowStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFollowStatusFilter<$PrismaModel> | $Enums.FollowStatus
+  }
+
   export type FollowRequestFollowerIdFolloweeIdCompoundUniqueInput = {
     followerId: number
     followeeId: number
@@ -22967,6 +22988,16 @@ export namespace Prisma {
     id?: SortOrder
     followerId?: SortOrder
     followeeId?: SortOrder
+  }
+
+  export type EnumFollowStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FollowStatus | EnumFollowStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FollowStatus[] | ListEnumFollowStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FollowStatus[] | ListEnumFollowStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFollowStatusWithAggregatesFilter<$PrismaModel> | $Enums.FollowStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFollowStatusFilter<$PrismaModel>
+    _max?: NestedEnumFollowStatusFilter<$PrismaModel>
   }
 
   export type PostMediaListRelationFilter = {
@@ -24196,6 +24227,10 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type EnumFollowStatusFieldUpdateOperationsInput = {
+    set?: $Enums.FollowStatus
+  }
+
   export type UserUpdateOneRequiredWithoutFollowerNestedInput = {
     create?: XOR<UserCreateWithoutFollowerInput, UserUncheckedCreateWithoutFollowerInput>
     connectOrCreate?: UserCreateOrConnectWithoutFollowerInput
@@ -24720,6 +24755,23 @@ export namespace Prisma {
     _max?: NestedEnumFriendStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumFollowStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FollowStatus | EnumFollowStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FollowStatus[] | ListEnumFollowStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FollowStatus[] | ListEnumFollowStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFollowStatusFilter<$PrismaModel> | $Enums.FollowStatus
+  }
+
+  export type NestedEnumFollowStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FollowStatus | EnumFollowStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FollowStatus[] | ListEnumFollowStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FollowStatus[] | ListEnumFollowStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFollowStatusWithAggregatesFilter<$PrismaModel> | $Enums.FollowStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFollowStatusFilter<$PrismaModel>
+    _max?: NestedEnumFollowStatusFilter<$PrismaModel>
+  }
+
   export type NestedEnumnotificationTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.notificationType | EnumnotificationTypeFieldRefInput<$PrismaModel>
     in?: $Enums.notificationType[] | ListEnumnotificationTypeFieldRefInput<$PrismaModel>
@@ -24842,7 +24894,7 @@ export namespace Prisma {
   }
 
   export type FollowRequestCreateWithoutFollowerInput = {
-    status?: $Enums.FriendStatus
+    status?: $Enums.FollowStatus
     isActive?: boolean
     createdAt?: Date | string
     followee: UserCreateNestedOneWithoutFolloweeInput
@@ -24851,7 +24903,7 @@ export namespace Prisma {
   export type FollowRequestUncheckedCreateWithoutFollowerInput = {
     id?: number
     followeeId: number
-    status?: $Enums.FriendStatus
+    status?: $Enums.FollowStatus
     isActive?: boolean
     createdAt?: Date | string
   }
@@ -24867,7 +24919,7 @@ export namespace Prisma {
   }
 
   export type FollowRequestCreateWithoutFolloweeInput = {
-    status?: $Enums.FriendStatus
+    status?: $Enums.FollowStatus
     isActive?: boolean
     createdAt?: Date | string
     follower: UserCreateNestedOneWithoutFollowerInput
@@ -24876,7 +24928,7 @@ export namespace Prisma {
   export type FollowRequestUncheckedCreateWithoutFolloweeInput = {
     id?: number
     followerId: number
-    status?: $Enums.FriendStatus
+    status?: $Enums.FollowStatus
     isActive?: boolean
     createdAt?: Date | string
   }
@@ -25252,7 +25304,7 @@ export namespace Prisma {
     id?: IntFilter<"FollowRequest"> | number
     followerId?: IntFilter<"FollowRequest"> | number
     followeeId?: IntFilter<"FollowRequest"> | number
-    status?: EnumFriendStatusFilter<"FollowRequest"> | $Enums.FriendStatus
+    status?: EnumFollowStatusFilter<"FollowRequest"> | $Enums.FollowStatus
     isActive?: BoolFilter<"FollowRequest"> | boolean
     createdAt?: DateTimeFilter<"FollowRequest"> | Date | string
   }
@@ -28182,7 +28234,7 @@ export namespace Prisma {
   export type FollowRequestCreateManyFollowerInput = {
     id?: number
     followeeId: number
-    status?: $Enums.FriendStatus
+    status?: $Enums.FollowStatus
     isActive?: boolean
     createdAt?: Date | string
   }
@@ -28190,7 +28242,7 @@ export namespace Prisma {
   export type FollowRequestCreateManyFolloweeInput = {
     id?: number
     followerId: number
-    status?: $Enums.FriendStatus
+    status?: $Enums.FollowStatus
     isActive?: boolean
     createdAt?: Date | string
   }
@@ -28366,7 +28418,7 @@ export namespace Prisma {
   }
 
   export type FollowRequestUpdateWithoutFollowerInput = {
-    status?: EnumFriendStatusFieldUpdateOperationsInput | $Enums.FriendStatus
+    status?: EnumFollowStatusFieldUpdateOperationsInput | $Enums.FollowStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     followee?: UserUpdateOneRequiredWithoutFolloweeNestedInput
@@ -28375,7 +28427,7 @@ export namespace Prisma {
   export type FollowRequestUncheckedUpdateWithoutFollowerInput = {
     id?: IntFieldUpdateOperationsInput | number
     followeeId?: IntFieldUpdateOperationsInput | number
-    status?: EnumFriendStatusFieldUpdateOperationsInput | $Enums.FriendStatus
+    status?: EnumFollowStatusFieldUpdateOperationsInput | $Enums.FollowStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28383,13 +28435,13 @@ export namespace Prisma {
   export type FollowRequestUncheckedUpdateManyWithoutFollowerInput = {
     id?: IntFieldUpdateOperationsInput | number
     followeeId?: IntFieldUpdateOperationsInput | number
-    status?: EnumFriendStatusFieldUpdateOperationsInput | $Enums.FriendStatus
+    status?: EnumFollowStatusFieldUpdateOperationsInput | $Enums.FollowStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FollowRequestUpdateWithoutFolloweeInput = {
-    status?: EnumFriendStatusFieldUpdateOperationsInput | $Enums.FriendStatus
+    status?: EnumFollowStatusFieldUpdateOperationsInput | $Enums.FollowStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     follower?: UserUpdateOneRequiredWithoutFollowerNestedInput
@@ -28398,7 +28450,7 @@ export namespace Prisma {
   export type FollowRequestUncheckedUpdateWithoutFolloweeInput = {
     id?: IntFieldUpdateOperationsInput | number
     followerId?: IntFieldUpdateOperationsInput | number
-    status?: EnumFriendStatusFieldUpdateOperationsInput | $Enums.FriendStatus
+    status?: EnumFollowStatusFieldUpdateOperationsInput | $Enums.FollowStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28406,7 +28458,7 @@ export namespace Prisma {
   export type FollowRequestUncheckedUpdateManyWithoutFolloweeInput = {
     id?: IntFieldUpdateOperationsInput | number
     followerId?: IntFieldUpdateOperationsInput | number
-    status?: EnumFriendStatusFieldUpdateOperationsInput | $Enums.FriendStatus
+    status?: EnumFollowStatusFieldUpdateOperationsInput | $Enums.FollowStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

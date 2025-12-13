@@ -13,9 +13,9 @@ async function getFollowersByUserid(req, res, next) {
       isActive: true,
       followeeId: followeeId,
     },
-    include:{
-      follower:true
-    }
+    include: {
+      follower: true,
+    },
   });
 
   return res.json(followers);
@@ -90,9 +90,23 @@ async function deleteFollowRequest(req, res, next) {
   });
 }
 
+async function getByUserIds(req, res, next) {
+  if (!req.query.followerId || !req.query.followeeId) return next();
+
+  const followRequest = await prisma.followRequest.findFirst({
+    where: {
+      followerId: Number(req.query.followerId),
+      followeeId: Number(req.query.followeeId),
+    },
+  });
+
+  return res.json(followRequest);
+}
+
 module.exports = {
   getFollowersByUserid,
   getFollowingsByUserId,
   createFollowRequest,
   deleteFollowRequest,
+  getByUserIds,
 };

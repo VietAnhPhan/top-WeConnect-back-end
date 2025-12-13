@@ -6,8 +6,6 @@ const postController = require("../controllers/postController");
 
 const router = Router();
 
-router.use(passport.authenticate(["jwt"], { session: false }));
-
 const sendValidationResults = (req, res, next) => {
   const validations = validationResult(req);
   if (!validations.isEmpty()) {
@@ -17,6 +15,10 @@ const sendValidationResults = (req, res, next) => {
   }
   next();
 };
+
+router.get("/", postController.getPosts);
+
+router.use(passport.authenticate(["jwt"], { session: false }));
 
 router.get("/users/:username", postController.getPostsByUsername);
 
@@ -37,7 +39,5 @@ router.post("/", postController.createPost);
 router.patch("/:id", postController.updatePost);
 
 router.delete("/:id", postController.deletePost);
-
-router.get("/", postController.getPosts);
 
 module.exports = router;

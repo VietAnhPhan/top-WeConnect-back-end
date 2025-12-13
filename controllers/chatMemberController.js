@@ -1,7 +1,7 @@
 const { prisma } = require("../config/helpers");
 
 async function getchatMember(req, res) {
-  const user = await prisma.chatMember.findFirst({
+  const user = await prisma.Participant.findFirst({
     where: {
       id: Number(req.params.id),
     },
@@ -11,7 +11,7 @@ async function getchatMember(req, res) {
 }
 
 async function getAllChatMembers(req, res, next) {
-  const chatMembers = await prisma.chatMember.findMany({
+  const chatMembers = await prisma.participant.findMany({
     where: {
       isActive: true,
     },
@@ -26,7 +26,7 @@ async function createChatMember(req, res, next) {
 
     const userId = Number(req.body.userId);
 
-    const chatMember = await prisma.chatMember.create({
+    const chatMember = await prisma.Participant.create({
       data: {
         userId: userId,
         conversationId: conversationId,

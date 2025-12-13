@@ -63,6 +63,7 @@ app.use("/api/comments", routes.comment);
 app.use("/api/likes", routes.like);
 app.use("/api/followRequests", routes.followRequest);
 app.use("/api/notifications", routes.notification);
+app.use("/api/postMedias",routes.postMedia)
 
 app.use((err, req, res, next) => {
   console.log(err);

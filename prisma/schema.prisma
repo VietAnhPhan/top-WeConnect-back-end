@@ -153,7 +153,7 @@ model FollowRequest {
   followerId Int
   followee   User         @relation("FolloweeUser", fields: [followeeId], references: [id])
   followeeId Int
-  status     FriendStatus @default(friends)
+  status     FollowStatus @default(following)
   isActive   Boolean      @default(true)
   createdAt  DateTime     @default(now())
 

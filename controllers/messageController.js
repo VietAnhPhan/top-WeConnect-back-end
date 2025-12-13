@@ -71,13 +71,13 @@ async function createMessage(req, res, next) {
         conversationId: conversation.id,
       };
 
-      const chatMember = {
+      const participant = {
         userId: chatUserId,
         conversationId: conversation.id,
       };
 
-      const chatMembers = await prisma.chatMember.createMany({
-        data: [authMember, chatMember],
+      const participants = await prisma.participant.createMany({
+        data: [authMember, participant],
       });
     }
 

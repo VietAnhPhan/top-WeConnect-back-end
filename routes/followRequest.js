@@ -37,4 +37,10 @@ router.get(
   followRequestController.getFollowingsByUserId
 );
 
+router.get(
+
+  "{followerId&followeeId}",
+  followRequestController.getByUserIds
+);
+
 module.exports = router;
