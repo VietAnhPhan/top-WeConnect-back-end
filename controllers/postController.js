@@ -42,9 +42,7 @@ async function getPosts(req, res) {
       PostMedia: true,
     },
     orderBy: {
-      Like: {
-        _count: "desc",
-      },
+      createdAt: "desc",
     },
   });
 
