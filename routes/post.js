@@ -16,28 +16,22 @@ const sendValidationResults = (req, res, next) => {
   next();
 };
 
+// Unauthenticaion
 router.get("/", postController.getPosts);
+router.get("{search}", postController.searchPosts);
 
+// Authentication
 router.use(passport.authenticate(["jwt"], { session: false }));
-
 router.get("/users/:username", postController.getPostsByUsername);
-
 router.use(
   "/:id",
   param("id").isNumeric().withMessage("Post Id should be a number"),
   sendValidationResults
 );
-
 router.get("/:id", postController.getPost);
-
-router.get("{search}", postController.searchPosts);
-
 router.get("{trending}", postController.getTrendingPosts);
-
 router.post("/", postController.createPost);
-
 router.patch("/:id", postController.updatePost);
-
 router.delete("/:id", postController.deletePost);
 
 module.exports = router;
