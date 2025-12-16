@@ -31,9 +31,9 @@ async function searchUsers(req, res, next) {
   if (req.query.search && req.query.search !== "") {
     const User = await prisma.user.findMany({
       where: {
-        NOT: {
-          username: req.user.username,
-        },
+        // NOT: {
+        //   username: req.user.username,
+        // },
         OR: [
           {
             username: { contains: req.query.search, mode: "insensitive" },
